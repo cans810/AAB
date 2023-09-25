@@ -1,0 +1,60 @@
+player objesini createnewcharacter ekranında oluşturmayı, veya editlemenin nasıl yapıldığını bul
+bunu Player isimli bir script oluşturarak yapmayı deneyebilirsin, burda tüm statler,attributelar vs.vs. olabilir
+aynı mantıkla battle sırası olacakları Battle isimli bir script oluşturup düzenleyebilirsin, (turn,dead vs.vs.)
+createnewcharacter ekranında statleri gerçek yap // yapıldı
+
+
+şuanki armorların hepsini teker teker spriteeditorda splitle, // yapıldı
+oyundaki pozisyonları düzgün mü bak,  layerlarını 12 veya 13 yap, ArmorLibrary'deki yerlerine ata. // yapıldı
+
+***NOT: BUNDAN SONRA EKLENEN YENİ ARMOR SPRİTELARI, ARMORLIBRARY'YE EKLENECEK.
+
+enemy'ye vurma detectionu yapıldı, kameraya ayarlamalar yapıldı, movement düzgünleştirildi, 
+movementSpeed ayarlanabiliyor, hitbox eklendi, eğer oyuncu x'i enemy x'ini geçerse side değiştirip
+180 derece dönme yapıldı. // yapılanlar
+
+oyunun java versiyonunda neler yaptıysan şuana kadar, hepsini buraya da ekle, bunları yaptıktan sonra ilerlemeye
+devam et...
+
+enemy'ye vurma, hp bar, isim yazma, battle esnasında genel hud, kamera zoom out oldukça mavi olan yerleri,
+background resminin devamı olan kısımlarla doldurmayı bul. // bunlar yapıldı
+
+xp ve level atlama ekle, // yapıldı
+level atlayınca levelup ekranında stat verilsin. verilen stat oyuncuya update edilsin. // yapıldı
+
+singleton oluşturuldu, do not destroyonload yapıldı oyuncu, her scene'den erişilebiliniyor. // yapıldı
+eğer levelup ekranındaysa, oyuncuyu statik yapabilirsin, veya level ekranında düşermiş gibi gözükebilir
+
+şehirde bir market oluştur, buton ekle, butona tıklanınca weapon değişsin // yapıldı
+
+item class'ı oluştur, weapon ve armor classı oluştur, extend etsinler item classını. // yapıldı
+
+armor giymek ve weapon giymek için birşeyler düşün: // yapıldı
+tek tek tüm armor giyilen bonelara script ekleyebilirsin, armormanager isimli // yapıldı
+
+player'a envanter ekle // yapıldı 
+
+weapon shop'a bir image bul, weapon shopa hazır olan silah itemini  // yapıldı
+koy, üstüne tıklanınca player'In envanterine eklensin ve giyilsin // yapıldı
+
+xp ve level ayarlamalarını yap 
+
+genel olarak hud ve gui'leri güzelleştir, arenaya gitmeyi, eve gitmeyi falan resme tıklayarak yap.
+Basit bir weaponcu marketi ekle şehre. entity'ye envanter ekle, weaponu giyme ekle, // yapıldı
+hem current silahı olsun hem gerçekten elinde tutsun. // yapıldı
+
+karakterlerin yüzündeki göz ve ağızları kafa sprite'ından sil. // yapıldı
+göz ve ağız çizmek için armor eklediğin gibi head bone'unda yeni iki tane bone oluştur,  // yapıldı
+göz ve ağız olan boneların mantığı, armorlara yaptığın mantığın aynısı olsun. // yapıldı
+FacialLibrary diye bir library oluştur ve çizdiğin göz ve ağızları buraya at, nasıl yapıldığını hatırlamak için // yapıldı
+ArmorLibrary'ye bak. // yapıldı
+saç ve sakal için de bone eklendi. // yapıldı
+
+karakter oluştururken saç ve sakal seçme de olsun. // temeli yapıldı
+
+bir tane de heavy attack ekle. // yapıldı
+
+diğer attributeları ekle, düzenle basit bir şekilde
+oyuncunun level'ına göre random attributelu enemy generatelemeyi yap, level azsa oyuncunun level seviyesinde enemy'ler...
+
+ÖNEMLİ NOT: Marketlere yeni item ekleneceği zaman, bu item createnewcharacter scene'indeki helmetManager veya swordsManager vs. 'lere eklenecek.

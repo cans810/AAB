@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: blood_1
+    m_Hash: 628582407
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: blood_1
+      m_Hash: 628582407
+      m_Sprite: {fileID: -3964847200648641297, guid: dbbcd4f087355bb4593b6497759c54ea, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -3964847200648641297, guid: dbbcd4f087355bb4593b6497759c54ea, type: 3}
+    - m_Name: blood_2
+      m_Hash: 1014905277
+      m_Sprite: {fileID: -952840472582152038, guid: dbbcd4f087355bb4593b6497759c54ea, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -952840472582152038, guid: dbbcd4f087355bb4593b6497759c54ea, type: 3}
+    - m_Name: blood_3
+      m_Hash: 192481579
+      m_Sprite: {fileID: -8616715605102216024, guid: dbbcd4f087355bb4593b6497759c54ea, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -8616715605102216024, guid: dbbcd4f087355bb4593b6497759c54ea, type: 3}
+    - m_Name: blood_4
+      m_Hash: 354262152
+      m_Sprite: {fileID: -7889536088219602757, guid: dbbcd4f087355bb4593b6497759c54ea, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -7889536088219602757, guid: dbbcd4f087355bb4593b6497759c54ea, type: 3}
+    - m_Name: blood_5
+      m_Hash: 572173342
+      m_Sprite: {fileID: 3504147689142727018, guid: dbbcd4f087355bb4593b6497759c54ea, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 3504147689142727018, guid: dbbcd4f087355bb4593b6497759c54ea, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 5
+  m_PrimaryLibraryGUID: 
