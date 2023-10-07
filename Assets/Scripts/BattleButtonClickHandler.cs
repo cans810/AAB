@@ -52,9 +52,9 @@ public class BattleButtonClickHandler : MonoBehaviour
             changeSidesButton.SetActive(true);
 
             // display hit chance
-            lightattackbutton.transform.Find("HitChance").GetComponent<TextMeshProUGUI>().text = "%" + (player.GetComponent<EntityAttributes>().hitChance_light*100).ToString();
-            mediumattackbutton.transform.Find("HitChance").GetComponent<TextMeshProUGUI>().text = "%" + (player.GetComponent<EntityAttributes>().hitChance_medium*100).ToString();
-            heavyattackbutton.transform.Find("HitChance").GetComponent<TextMeshProUGUI>().text = "%" + (player.GetComponent<EntityAttributes>().hitChance_heavy*100).ToString();
+            lightattackbutton.transform.Find("HitChance").GetComponent<TextMeshProUGUI>().text = "%" + (player.GetComponent<EntityAttributes>().hitChance_light * 100).ToString("F0");
+            mediumattackbutton.transform.Find("HitChance").GetComponent<TextMeshProUGUI>().text = "%" + (player.GetComponent<EntityAttributes>().hitChance_medium*100).ToString("F0");
+            heavyattackbutton.transform.Find("HitChance").GetComponent<TextMeshProUGUI>().text = "%" + (player.GetComponent<EntityAttributes>().hitChance_heavy*100).ToString("F0");
         }
         else{
             leapattackbutton.SetActive(true);
@@ -65,7 +65,7 @@ public class BattleButtonClickHandler : MonoBehaviour
             changeSidesButton.SetActive(false);
 
             // display hit chance
-            leapattackbutton.transform.Find("HitChance").GetComponent<TextMeshProUGUI>().text = "%" + (player.GetComponent<EntityAttributes>().hitChance_leap*100).ToString();
+            leapattackbutton.transform.Find("HitChance").GetComponent<TextMeshProUGUI>().text = "%" + (player.GetComponent<EntityAttributes>().hitChance_leap*100).ToString("F0");
         }
     }
 

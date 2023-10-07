@@ -306,6 +306,6 @@ public class CreateNewCharacter : MonoBehaviour
         backgroundMusicManager.GetComponent<BackgroundMusicManager>().StartFadeOut();
         
         GameObject sceneLoader = GameObject.Find("SceneLoader");
-        sceneLoader.GetComponent<SceneLoader>().FadeToLevel("FirstBattleScene");
+        sceneLoader.GetComponent<SceneLoader>().FadeToLevel("BattleScene");
     }
 }

@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D.Animation;
 
-public class RandomEnemyGenerator : MonoBehaviour
+public class EnemyGeneratorController : MonoBehaviour
 {
     public GameObject prefabToSpawn;
     public static GameObject Instance;
-    
     public Color randomSkinColorGenerated;
     public SpriteLibraryAsset[] skins;
     private List<string> races = new List<string>();
+
+    public List<GameObject> BossesList;
+
+    public static bool SlainRomulusTheLeatherman;
+    public static bool SlainFerullus;
     
     private void Awake()
     {
-        
         DontDestroyOnLoad(gameObject);
-        
-        
 
         fillRaces();
     }
@@ -47,6 +48,11 @@ public class RandomEnemyGenerator : MonoBehaviour
             ChangeSkinColor(generateRandomSkinColor());
 
             // STATS
+            HitChance_light = Instance.GetComponent<EntityAttributes>().baseHitChance_light;
+            HitChance_medium = Instance.GetComponent<EntityAttributes>().baseHitChance_medium;
+            HitChance_heavy = Instance.GetComponent<EntityAttributes>().baseHitChance_heavy;
+            HitChance_leap = Instance.GetComponent<EntityAttributes>().baseHitChance_leap;
+
             STATS_generateRandomStrength();
             STATS_generateRandomVitality();
             STATS_generateRandomStamina();
@@ -58,6 +64,57 @@ public class RandomEnemyGenerator : MonoBehaviour
         {
             Debug.LogError("Enemy component not found on the prefab instance.");
         }
+
+        DontDestroyOnLoad(Instance);
+    }
+
+    public void generateRomulusTheLeatherman(){
+        generateBoss(BossesList[0]);
+
+        // APPEREANCE (skin color, race)
+        ChangeSkinColor(generateSpecificSkinColor(50,30,60));
+
+        // STATS
+        HitChance_light = Instance.GetComponent<EntityAttributes>().baseHitChance_light;
+        HitChance_medium = Instance.GetComponent<EntityAttributes>().baseHitChance_medium;
+        HitChance_heavy = Instance.GetComponent<EntityAttributes>().baseHitChance_heavy;
+        HitChance_leap = Instance.GetComponent<EntityAttributes>().baseHitChance_leap;
+
+        STATS_generateSpecificStrength(5);
+        STATS_generateSpecificVitality(7);
+        STATS_generateSpecificStamina(6);
+        STATS_generateSpecificDexterity(3);
+        STATS_generateSpecificOffense(3);
+        STATS_generateSpecificDefence(5);
+    }
+
+    public void generateFerullus(){
+        generateBoss(BossesList[1]);
+
+        // APPEREANCE (skin color, race)
+        ChangeSkinColor(generateSpecificSkinColor(252,186,152));
+
+        // STATS
+        HitChance_light = Instance.GetComponent<EntityAttributes>().baseHitChance_light;
+        HitChance_medium = Instance.GetComponent<EntityAttributes>().baseHitChance_medium;
+        HitChance_heavy = Instance.GetComponent<EntityAttributes>().baseHitChance_heavy;
+        HitChance_leap = Instance.GetComponent<EntityAttributes>().baseHitChance_leap;
+
+        STATS_generateSpecificStrength(20);
+        STATS_generateSpecificVitality(7);
+        STATS_generateSpecificStamina(2);
+        STATS_generateSpecificDexterity(2);
+        STATS_generateSpecificOffense(9);
+        STATS_generateSpecificDefence(6);
+    }
+
+    public void generateBoss(GameObject bossPrefab){
+        // to remove the existing enemy completely
+        if(Instance != null){
+            Destroy(Instance);
+        }
+
+        Instance = Instantiate(bossPrefab);
 
         DontDestroyOnLoad(Instance);
     }
@@ -145,6 +202,11 @@ public class RandomEnemyGenerator : MonoBehaviour
         }
     }
 
+    public static float HitChance_light;
+    public static float HitChance_medium;
+    public static float HitChance_heavy;
+    public static float HitChance_leap;
+
     public void STATS_generateRandomOffense(){
         int randomOffenseValue = UnityEngine.Random.Range(1,10);
 
@@ -152,12 +214,16 @@ public class RandomEnemyGenerator : MonoBehaviour
 
         for (int i=1;i<randomOffenseValue;i++){
             Instance.GetComponent<EntityAttributes>().baseHitChance_light *= 1.0545f;
+            HitChance_light *= 1.0545f;
 
             Instance.GetComponent<EntityAttributes>().baseHitChance_medium *= 1.0545f;
+            HitChance_medium *= 1.0545f;
 
             Instance.GetComponent<EntityAttributes>().baseHitChance_heavy *= 1.0545f;
+            HitChance_heavy *= 1.0545f;
 
             Instance.GetComponent<EntityAttributes>().baseHitChance_leap *= 1.0545f;
+            HitChance_leap *= 1.0545f;
 
             if (Instance.GetComponent<EntityAttributes>().baseHitChance_light*100 > 90) Instance.GetComponent<EntityAttributes>().baseHitChance_light = 90f/100f;
             if (Instance.GetComponent<EntityAttributes>().baseHitChance_medium*100 > 90) Instance.GetComponent<EntityAttributes>().baseHitChance_medium = 90f/100f;
@@ -170,6 +236,104 @@ public class RandomEnemyGenerator : MonoBehaviour
         int randomDefenceValue = UnityEngine.Random.Range(1,10);
 
         Instance.GetComponent<EntityAttributes>().defence = randomDefenceValue;
+    }
+
+    public Color generateSpecificSkinColor(int red,int green,int blue){
+
+        randomSkinColorGenerated = new Color(red/ 255f,green/ 255f,blue/ 255f);
+
+        return randomSkinColorGenerated;
+    }
+
+    public void STATS_generateSpecificStrength(int strength){
+
+        Instance.GetComponent<EntityAttributes>().strength = strength;
+
+        for (int i=1;i<strength;i++){
+
+            Instance.GetComponent<EntityAttributes>().heightInCm += 2f;
+            Instance.GetComponent<EntityAttributes>().hitDamage += 2;
+
+            // adjust player size here
+            // Store the original position
+            Vector3 originalPosition = Instance.transform.position;
+
+            // Calculate the new scale uniformly
+            float newScale =  Instance.GetComponent<Enemy>().showcaseScale.x * 1.01f;
+
+            // Calculate the position adjustment based on the scale change
+            Vector3 positionAdjustment = (newScale -  Instance.GetComponent<Enemy>().showcaseScale.x) * 0.59f *  Instance.transform.up;
+
+            // Apply the new scale and adjust the position
+            Instance.GetComponent<Enemy>().showcaseScale = new Vector3(newScale, newScale,  Instance.GetComponent<Enemy>().showcaseScale.z);
+
+            // Calculate the new scale uniformly
+            float newScaleReal =  Instance.GetComponent<Enemy>().originalScale.x * 1.01f;
+
+            // Calculate the position adjustment based on the scale change
+            Vector3 positionAdjustmentReal = (newScaleReal -  Instance.GetComponent<Enemy>().originalScale.x) * 0.59f *  Instance.transform.up;
+
+            // Apply the new scale and adjust the position
+            Instance.GetComponent<Enemy>().originalScale = new Vector3(newScaleReal, newScaleReal,  Instance.GetComponent<Enemy>().originalScale.z);
+
+            Instance.transform.position = originalPosition - positionAdjustment;
+            //player.transform.position = originalPosition - positionAdjustmentReal;
+        }
+    }
+
+    public void STATS_generateSpecificVitality(int vitality){
+        Instance.GetComponent<EntityAttributes>().vitality = vitality;
+
+        for (int i=1;i<vitality;i++){
+            Instance.GetComponent<EntityAttributes>().maxHP += 10;
+        }
+    }
+
+    public void STATS_generateSpecificStamina(int stamina){
+        Instance.GetComponent<EntityAttributes>().stamina = stamina;
+
+        for (int i=1;i<stamina;i++){
+            Instance.GetComponent<EntityAttributes>().maxSP += 10;
+        }
+    }
+
+    public void STATS_generateSpecificDexterity(int dexterity){
+        Instance.GetComponent<EntityAttributes>().dexterity = dexterity;
+
+        for (int i=1;i<dexterity;i++){
+            Instance.GetComponent<EntityAttributes>().stepSize += 0.2f;
+            Instance.GetComponent<EntityAttributes>().moveSpeed += 0.1f;
+        }
+    }
+
+    public void STATS_generateSpecificOffense(int offense){
+        int randomOffenseValue = UnityEngine.Random.Range(1,10);
+
+        Instance.GetComponent<EntityAttributes>().offense = offense;
+
+        for (int i=1;i<offense;i++){
+            Instance.GetComponent<EntityAttributes>().baseHitChance_light *= 1.0545f;
+            HitChance_light *= 1.0545f;
+
+            Instance.GetComponent<EntityAttributes>().baseHitChance_medium *= 1.0545f;
+            HitChance_medium *= 1.0545f;
+
+            Instance.GetComponent<EntityAttributes>().baseHitChance_heavy *= 1.0545f;
+            HitChance_heavy *= 1.0545f;
+
+            Instance.GetComponent<EntityAttributes>().baseHitChance_leap *= 1.0545f;
+            HitChance_leap *= 1.0545f;
+
+            if (Instance.GetComponent<EntityAttributes>().baseHitChance_light*100 > 90) Instance.GetComponent<EntityAttributes>().baseHitChance_light = 90f/100f;
+            if (Instance.GetComponent<EntityAttributes>().baseHitChance_medium*100 > 90) Instance.GetComponent<EntityAttributes>().baseHitChance_medium = 90f/100f;
+            if (Instance.GetComponent<EntityAttributes>().baseHitChance_heavy*100 > 90) Instance.GetComponent<EntityAttributes>().baseHitChance_heavy = 90f/100f;
+            if (Instance.GetComponent<EntityAttributes>().baseHitChance_leap*100 > 90) Instance.GetComponent<EntityAttributes>().baseHitChance_leap = 90f/100f;
+        }
+    }
+
+    public void STATS_generateSpecificDefence(int defence){
+
+        Instance.GetComponent<EntityAttributes>().defence = defence;
     }
 
     private void ChangeSkinColor(Color skinColor){

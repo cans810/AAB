@@ -16,7 +16,7 @@ public class CameraZoom : MonoBehaviour
     private void Start()
     {
         player = Player.Instance.transform;
-        enemy = RandomEnemyGenerator.Instance.transform;
+        enemy = EnemyGeneratorController.Instance.transform;
         mainCamera = Camera.main;
         mainCamera.orthographicSize = initialOrthographicSize;
     }

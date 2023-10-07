@@ -8,8 +8,9 @@ using UnityEngine.UI;
 public class EnemyHUD : MonoBehaviour
 {
     public TMP_Text nameField;
-     public TextMeshProUGUI hpText;
-     public TextMeshProUGUI spText;
+    public TextMeshProUGUI hpText;
+    public TextMeshProUGUI spText;
+    public GameObject armorText;
 
     public Image healthBar;
     public Image staminaBar;
@@ -26,7 +27,7 @@ public class EnemyHUD : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemy = RandomEnemyGenerator.Instance;
+        enemy = EnemyGeneratorController.Instance;
     }
 
     // Update is called once per frame
@@ -41,10 +42,13 @@ public class EnemyHUD : MonoBehaviour
             if (enemy.GetComponent<EntityAttributes>().maxArmorPoint == 0){
                 armorBar.fillAmount = 0;
                 armorBarOutline.SetActive(false);
+                armorText.SetActive(false);
             }
             else{
                 armorBarOutline.SetActive(true);
+                armorText.SetActive(true);
                 armorBar.fillAmount = enemy.GetComponent<EntityAttributes>().armorPoint / enemy.GetComponent<EntityAttributes>().maxArmorPoint;
+                armorText.GetComponent<TextMeshProUGUI>().text = enemy.GetComponent<EntityAttributes>().armorPoint.ToString();
             }
         }
 

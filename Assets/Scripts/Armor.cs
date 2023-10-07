@@ -12,11 +12,13 @@ public class Armor : Item
     public int armorPoint;
 
     public Sprite pair;
-    public Armor(string itemName,Sprite texture,string category,int armorPoint,int level){
+    public Sprite pairExtra;
+    public Armor(string itemName,Sprite texture,string category,int armorPoint,int level,int price){
         this.itemName = itemName;
         this.texture = texture;
         this.category = category;
         this.armorPoint = armorPoint;
         this.level = level;
+        this.price = price;
     }
 }

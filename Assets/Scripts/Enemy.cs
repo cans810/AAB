@@ -69,6 +69,7 @@ public class Enemy : Entity
         gameObject.GetComponent<EnemyActionsManager>().canAttack_Melee = false;
 
         gameObject.GetComponent<EntityAttributes>().calculateMaxArmorPoint();
+        gameObject.GetComponent<EntityAttributes>().updatePowerValue();
     }
 
     public void resetAfterBattle(){
@@ -173,6 +174,10 @@ public class Enemy : Entity
         }
 
         else if(gameObject.GetComponent<EnemyActionsManager>().blockingMelee){
+            animator.SetBool("Idle",false);
+        }
+
+        else if(gameObject.GetComponent<EnemyActionsManager>().showcaseAnim){
             animator.SetBool("Idle",false);
         }
 

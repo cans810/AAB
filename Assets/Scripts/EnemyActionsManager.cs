@@ -19,6 +19,7 @@ public class EnemyActionsManager : MonoBehaviour
     public bool surrendering;
     public bool dying;
     public bool intimidating;
+    public bool showcaseAnim;
     public bool inAction;
     public bool played;
     public bool canAttack_Melee;
@@ -438,7 +439,7 @@ public class EnemyActionsManager : MonoBehaviour
         if (canAttack_Melee){
             GameObject enemy = GameObject.FindWithTag("Player");
             calculateHitChance("melee_leap",GetComponent<EntityAttributes>().baseHitChance_leap);
-            enemy.GetComponent<ActionsManager>().getHit(GetComponent<EntityAttributes>().hitDamage,generateHitChance(GetComponent<EntityAttributes>().baseHitChance_leap));
+            enemy.GetComponent<ActionsManager>().getHit(GetComponent<EntityAttributes>().hitDamage,generateHitChance(calculateHitChance("melee_leap",GetComponent<EntityAttributes>().baseHitChance_leap)));
             Debug.Log("hit");
         }
     }
@@ -448,13 +449,13 @@ public class EnemyActionsManager : MonoBehaviour
 
         if (canAttack_Melee){
             if (attackingLight){
-                enemy.GetComponent<ActionsManager>().getHit(GetComponent<EntityAttributes>().hitDamage,generateHitChance(GetComponent<EntityAttributes>().baseHitChance_light));
+                enemy.GetComponent<ActionsManager>().getHit(GetComponent<EntityAttributes>().hitDamage,generateHitChance(calculateHitChance("melee_light",GetComponent<EntityAttributes>().baseHitChance_light)));
             }
             else if (attackingMedium){
-                enemy.GetComponent<ActionsManager>().getHit(GetComponent<EntityAttributes>().hitDamage*1.5f,generateHitChance(GetComponent<EntityAttributes>().baseHitChance_medium));
+                enemy.GetComponent<ActionsManager>().getHit(GetComponent<EntityAttributes>().hitDamage*1.5f,generateHitChance(calculateHitChance("melee_medium",GetComponent<EntityAttributes>().baseHitChance_medium)));
             }
             else if (attackingHeavy){
-                enemy.GetComponent<ActionsManager>().getHit(GetComponent<EntityAttributes>().hitDamage*2f,generateHitChance(GetComponent<EntityAttributes>().baseHitChance_heavy));
+                enemy.GetComponent<ActionsManager>().getHit(GetComponent<EntityAttributes>().hitDamage*2f,generateHitChance(calculateHitChance("melee_heavy",GetComponent<EntityAttributes>().baseHitChance_heavy)));
             }
         }
     }
@@ -464,30 +465,69 @@ public class EnemyActionsManager : MonoBehaviour
 
         if (hitType.Equals("melee_light")){
 
+            float hitChanceCopy = EnemyGeneratorController.HitChance_light;
 
             for (int i=1;i<enemy.GetComponent<EntityAttributes>().defence;i++){
-                baseHitChance *= 0.94f;
+                baseHitChance *= 0.9f;
+                hitChanceCopy *= 0.9f;
+            }
+
+            if (hitChanceCopy*100 >= 90){
+                baseHitChance = 90f/100f;
+            }
+            else{
+                baseHitChance = hitChanceCopy;
             }
         }
 
         else if (hitType.Equals("melee_medium")){
             
+            float hitChanceCopy = EnemyGeneratorController.HitChance_medium;
+
             for (int i=1;i<enemy.GetComponent<EntityAttributes>().defence;i++){
-                baseHitChance *= 0.94f;
+                baseHitChance *= 0.9f;
+                hitChanceCopy *= 0.9f;
+            }
+
+            if (hitChanceCopy*100 >= 90){
+                baseHitChance = 90f/100f;
+            }
+            else{
+                baseHitChance = hitChanceCopy;
             }
         }
 
         else if (hitType.Equals("melee_heavy")){
             
+            float hitChanceCopy = EnemyGeneratorController.HitChance_heavy;
+
             for (int i=1;i<enemy.GetComponent<EntityAttributes>().defence;i++){
-                baseHitChance *= 0.94f;
+                baseHitChance *= 0.9f;
+                hitChanceCopy *= 0.9f;
+            }
+
+            if (hitChanceCopy*100 >= 90){
+                baseHitChance = 90f/100f;
+            }
+            else{
+                baseHitChance = hitChanceCopy;
             }
         }
 
         else if (hitType.Equals("melee_leap")){
             
+            float hitChanceCopy = EnemyGeneratorController.HitChance_leap;
+
             for (int i=1;i<enemy.GetComponent<EntityAttributes>().defence;i++){
-                baseHitChance *= 0.94f;
+                baseHitChance *= 0.9f;
+                hitChanceCopy *= 0.9f;
+            }
+
+            if (hitChanceCopy*100 >= 90){
+                baseHitChance = 90f/100f;
+            }
+            else{
+                baseHitChance = hitChanceCopy;
             }
         }
 
@@ -577,6 +617,13 @@ public class EnemyActionsManager : MonoBehaviour
 
     public void changeMouth(string mouthState){
         gameObject.GetComponent<ExpressionManager>().mouth_state = mouthState;
+    }
+
+    public void startShowcaseAnimBool(){
+        showcaseAnim = true;
+    }
+    public void endShowcaseAnimBool(){
+        showcaseAnim = false;
     }
 
     public GameObject currentEnemyInBattle(){

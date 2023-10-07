@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (inBattle){
-            currentEnemy = RandomEnemyGenerator.Instance.GetComponent<Enemy>();
+            currentEnemy = EnemyGeneratorController.Instance.GetComponent<Enemy>();
         }
         if (inArena){
 

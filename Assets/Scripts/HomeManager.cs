@@ -18,24 +18,22 @@ public class HomeManager : MonoBehaviour
 
     public GameObject goBackButton;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        player = Player.Instance;
-        playerBasePos = player.transform.position;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public GameObject equipButton;
+    public GameObject unEquipButton;
 
     private void OnEnable(){
         inventoryList.SetActive(false);
         equippedInventoryList.SetActive(false);
 
-        player.transform.position = new Vector3(-4,-5,0);
+        player = Player.Instance;
+        playerBasePos = player.transform.position;
+        player.GetComponent<Player>().transform.localScale = player.GetComponent<Player>().originalScale;
+        player.GetComponent<Player>().transform.position = new Vector3(4.54f,-3.5f,0);
+        player.GetComponent<Player>().transform.localScale = new Vector3(player.GetComponent<Player>().transform.localScale.x*1.5f, player.GetComponent<Player>().transform.localScale.y*1.5f, 
+        player.GetComponent<Player>().transform.localScale.z*1.5f);
+
+        // Freeze the Y-axis position
+        player.rb.constraints = RigidbodyConstraints2D.FreezePositionY;
     }
 
     public void showInventory(){
@@ -60,9 +58,12 @@ public class HomeManager : MonoBehaviour
         inventoryButton.SetActive(true);
         equippedInventoryButton.SetActive(true);
         goBackButton.SetActive(false);
+        equipButton.SetActive(false);
+        unEquipButton.SetActive(false);
     }
 
     private void OnDisable(){
         player.transform.position = playerBasePos;
+        player.rb.constraints = RigidbodyConstraints2D.None;
     }
 }

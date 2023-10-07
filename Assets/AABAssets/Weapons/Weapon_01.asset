@@ -16,5 +16,7 @@ MonoBehaviour:
   isWorn: 0
   texture: {fileID: -1154136425, guid: 858cd2a7a29a0ce4e8acb1227114524b, type: 3}
   level: -1
+  price: 300
   category: righthand_equipment
   equipped: 0
+  meleeDamage: 0

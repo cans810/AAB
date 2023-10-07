@@ -14,9 +14,7 @@ public class TownManager : MonoBehaviour
 
     GameObject playerObject;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    void OnEnable(){
         homeObject.SetActive(false);
         arenaObject.SetActive(false);
         weaponShopObject.SetActive(false);
@@ -25,24 +23,26 @@ public class TownManager : MonoBehaviour
         enemyGenerator = GameObject.Find("GladiatorGenerator");
 
         playerObject = GameObject.Find("Player");
+        playerObject.GetComponent<Player>().transform.localScale = playerObject.GetComponent<Player>().originalScale;
         playerObject.GetComponent<Player>().transform.position = new Vector3(-1,-4.536973f,0);
-        playerObject.GetComponent<Player>().transform.localScale = new Vector3(playerObject.GetComponent<Player>().transform.localScale.x*2/5f, playerObject.GetComponent<Player>().transform.localScale.y*2/5f, 
-        playerObject.GetComponent<Player>().transform.localScale.z*2/5f);
-        
+        playerObject.GetComponent<Player>().transform.localScale = new Vector3(playerObject.GetComponent<Player>().transform.localScale.x*5/10f, playerObject.GetComponent<Player>().transform.localScale.y*5/10f, 
+        playerObject.GetComponent<Player>().transform.localScale.z*5/10f);
+
+        // Freeze the Y-axis position
+        playerObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
     }
 
-    void OnEnable(){
-        playerObject.GetComponent<Player>().transform.localScale = new Vector3(playerObject.GetComponent<Player>().transform.localScale.x*2/5f, playerObject.GetComponent<Player>().transform.localScale.y*2/5f, 
-        playerObject.GetComponent<Player>().transform.localScale.z*2/5f);
+    void OnDisable(){
+        // Freeze the Y-axis position
+        playerObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (RandomEnemyGenerator.Instance != null){
-            Destroy(RandomEnemyGenerator.Instance);
+        if (EnemyGeneratorController.Instance != null){
+            Destroy(EnemyGeneratorController.Instance);
         }
-        playerObject.GetComponent<Player>().transform.position = new Vector3(-1,-4.536973f,0);
     }
 
     public void goToTown(){
@@ -89,7 +89,7 @@ public class TownManager : MonoBehaviour
 
     public void enterFirstBattle(){
         GameObject sceneLoader = GameObject.Find("SceneLoader");
-        sceneLoader.GetComponent<SceneLoader>().FadeToLevel("FirstBattleScene");
+        sceneLoader.GetComponent<SceneLoader>().FadeToLevel("BattleScene");
     }
 
 }

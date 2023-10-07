@@ -458,29 +458,70 @@ public class ActionsManager : MonoBehaviour
         GameObject enemy = GameObject.FindWithTag("Enemy");
 
         if (hitType.Equals("melee_light")){
+
+            float hitChanceCopy = CreateNewCharacter.HitChance_light;
+
             for (int i=1;i<enemy.GetComponent<EntityAttributes>().defence;i++){
-                baseHitChance *= 0.94f;
+                baseHitChance *= 0.9f;
+                hitChanceCopy *= 0.9f;
+            }
+
+            if (hitChanceCopy*100 >= 90){
+                baseHitChance = 90f/100f;
+            }
+            else{
+                baseHitChance = hitChanceCopy;
             }
         }
 
         else if (hitType.Equals("melee_medium")){
             
+            float hitChanceCopy = CreateNewCharacter.HitChance_medium;
+
             for (int i=1;i<enemy.GetComponent<EntityAttributes>().defence;i++){
-                baseHitChance *= 0.94f;
+                baseHitChance *= 0.9f;
+                hitChanceCopy *= 0.9f;
+            }
+
+            if (hitChanceCopy*100 >= 90){
+                baseHitChance = 90f/100f;
+            }
+            else{
+                baseHitChance = hitChanceCopy;
             }
         }
 
         else if (hitType.Equals("melee_heavy")){
             
+            float hitChanceCopy = CreateNewCharacter.HitChance_heavy;
+
             for (int i=1;i<enemy.GetComponent<EntityAttributes>().defence;i++){
-                baseHitChance *= 0.94f;
+                baseHitChance *= 0.9f;
+                hitChanceCopy *= 0.9f;
+            }
+
+            if (hitChanceCopy*100 >= 90){
+                baseHitChance = 90f/100f;
+            }
+            else{
+                baseHitChance = hitChanceCopy;
             }
         }
 
         else if (hitType.Equals("melee_leap")){
             
+            float hitChanceCopy = CreateNewCharacter.HitChance_leap;
+
             for (int i=1;i<enemy.GetComponent<EntityAttributes>().defence;i++){
-                baseHitChance *= 0.94f;
+                baseHitChance *= 0.9f;
+                hitChanceCopy *= 0.9f;
+            }
+
+            if (hitChanceCopy*100 >= 90){
+                baseHitChance = 90f/100f;
+            }
+            else{
+                baseHitChance = hitChanceCopy;
             }
         }
 

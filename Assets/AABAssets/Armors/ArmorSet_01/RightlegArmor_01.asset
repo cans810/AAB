@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: RightlegArmor_01
   isWorn: 0
-  texture: {fileID: 9116846939169719484, guid: 64d39684b978c0f4bbbd8d9866f55148, type: 3}
+  texture: {fileID: 8356174334533271651, guid: 64d39684b978c0f4bbbd8d9866f55148, type: 3}
   level: 0
+  price: 500
+  category: leg_armor
   category: leg_armor
   equipped: 1
   armorPoint: 7
-  pair: {fileID: -2301412589393539475, guid: 64d39684b978c0f4bbbd8d9866f55148, type: 3}
+  pair: {fileID: 2847995392282740432, guid: 64d39684b978c0f4bbbd8d9866f55148, type: 3}
+  pairExtra: {fileID: -2330178813871308635, guid: 64d39684b978c0f4bbbd8d9866f55148, type: 3}

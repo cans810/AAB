@@ -16,6 +16,7 @@ MonoBehaviour:
   isWorn: 0
   texture: {fileID: 4904252724259669982, guid: 64d39684b978c0f4bbbd8d9866f55148, type: 3}
   level: 0
+  price: 200
   category: foot_armor
   equipped: 0
   armorPoint: 2

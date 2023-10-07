@@ -49,14 +49,9 @@ public class LevelUpScene : MonoBehaviour
         textMeshPro_auraPoint_text = auraPointGameObject.GetComponent<TextMeshProUGUI>();
         textMeshPro_magicPoint_text = magicPointGameObject.GetComponent<TextMeshProUGUI>();
 
-        if (RandomEnemyGenerator.Instance != null){
-            Destroy(RandomEnemyGenerator.Instance);
+        if (EnemyGeneratorController.Instance != null){
+            Destroy(EnemyGeneratorController.Instance);
         }
-
-        HitChance_light = CreateNewCharacter.HitChance_light;
-        HitChance_medium = CreateNewCharacter.HitChance_medium;
-        HitChance_heavy = CreateNewCharacter.HitChance_heavy;
-        HitChance_leap = CreateNewCharacter.HitChance_leap;
     }
 
     // Update is called once per frame
@@ -182,16 +177,16 @@ public class LevelUpScene : MonoBehaviour
         player.GetComponent<EntityAttributes>().offense += 1;
 
         player.GetComponent<EntityAttributes>().baseHitChance_light *= 1.0545f;
-        HitChance_light *= 1.0545f;
+        CreateNewCharacter.HitChance_light *= 1.0545f;
 
         player.GetComponent<EntityAttributes>().baseHitChance_medium *= 1.0545f;
-        HitChance_medium *= 1.0545f;
+        CreateNewCharacter.HitChance_medium *= 1.0545f;
 
         player.GetComponent<EntityAttributes>().baseHitChance_heavy *= 1.0545f;
-        HitChance_heavy *= 1.0545f;
+        CreateNewCharacter.HitChance_heavy *= 1.0545f;
 
         player.GetComponent<EntityAttributes>().baseHitChance_leap *= 1.0545f;
-        HitChance_leap *= 1.0545f;
+        CreateNewCharacter.HitChance_leap *= 1.0545f;
 
         if (player.GetComponent<EntityAttributes>().baseHitChance_light*100 > 90) player.GetComponent<EntityAttributes>().baseHitChance_light = 90f/100f;
         if (player.GetComponent<EntityAttributes>().baseHitChance_medium*100 > 90) player.GetComponent<EntityAttributes>().baseHitChance_medium = 90f/100f;
@@ -203,21 +198,21 @@ public class LevelUpScene : MonoBehaviour
         player.GetComponent<EntityAttributes>().offense -= 1;
 
         player.GetComponent<EntityAttributes>().baseHitChance_light /= 1.0545f;
-        HitChance_light /= 1.0545f;
+        CreateNewCharacter.HitChance_light /= 1.0545f;
 
         player.GetComponent<EntityAttributes>().baseHitChance_medium /= 1.0545f;
-        HitChance_medium /= 1.0545f;
+        CreateNewCharacter.HitChance_medium /= 1.0545f;
 
         player.GetComponent<EntityAttributes>().baseHitChance_heavy /= 1.0545f;
-        HitChance_heavy /= 1.0545f;
+        CreateNewCharacter.HitChance_heavy /= 1.0545f;
 
         player.GetComponent<EntityAttributes>().baseHitChance_leap /= 1.0545f;
-        HitChance_leap /= 1.0545f;
+        CreateNewCharacter.HitChance_leap /= 1.0545f;
 
-        if (player.GetComponent<EntityAttributes>().baseHitChance_light*100 < 90) player.GetComponent<EntityAttributes>().baseHitChance_light = HitChance_light;
-        if (player.GetComponent<EntityAttributes>().baseHitChance_medium*100 < 90) player.GetComponent<EntityAttributes>().baseHitChance_medium = HitChance_medium;
-        if (player.GetComponent<EntityAttributes>().baseHitChance_heavy*100 < 90) player.GetComponent<EntityAttributes>().baseHitChance_heavy = HitChance_heavy;
-        if (player.GetComponent<EntityAttributes>().baseHitChance_leap*100 < 90) player.GetComponent<EntityAttributes>().baseHitChance_leap = HitChance_leap;
+        if (player.GetComponent<EntityAttributes>().baseHitChance_light*100 < 90) player.GetComponent<EntityAttributes>().baseHitChance_light = CreateNewCharacter.HitChance_light;
+        if (player.GetComponent<EntityAttributes>().baseHitChance_medium*100 < 90) player.GetComponent<EntityAttributes>().baseHitChance_medium = CreateNewCharacter.HitChance_medium;
+        if (player.GetComponent<EntityAttributes>().baseHitChance_heavy*100 < 90) player.GetComponent<EntityAttributes>().baseHitChance_heavy = CreateNewCharacter.HitChance_heavy;
+        if (player.GetComponent<EntityAttributes>().baseHitChance_leap*100 < 90) player.GetComponent<EntityAttributes>().baseHitChance_leap = CreateNewCharacter.HitChance_leap;
         
         if (player.GetComponent<EntityAttributes>().baseHitChance_light*100 > 90) player.GetComponent<EntityAttributes>().baseHitChance_light = 90f/100f;
         if (player.GetComponent<EntityAttributes>().baseHitChance_medium*100 > 90) player.GetComponent<EntityAttributes>().baseHitChance_medium = 90f/100f;

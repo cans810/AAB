@@ -7,6 +7,7 @@ public class EntityAttributes : MonoBehaviour
 {
     public int level;
     public double xp;
+    public float PowerValue;
 
     public int strength;
     public int stamina;
@@ -47,8 +48,8 @@ public class EntityAttributes : MonoBehaviour
     public float stepSize;
 
     void Awake(){
-        xp = PlayerLevelManager.xp;
-        level = PlayerLevelManager.level;
+        xp = 0;
+        level = 1;
 
         // strength defines hitDamage
         baseHitDamage = 12;
@@ -96,10 +97,15 @@ public class EntityAttributes : MonoBehaviour
         stepSize = 1f;
     }
 
-    public void updateAttributes(){
+    public void updatePowerValue(){ 
+        PowerValue = 0;
 
-        
-
+        PowerValue += strength;
+        PowerValue += stamina;
+        PowerValue += dexterity;
+        PowerValue += offense;
+        PowerValue += defence;
+        PowerValue += vitality;
     }
 
     public void calculateMaxArmorPoint(){

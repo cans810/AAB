@@ -16,7 +16,9 @@ MonoBehaviour:
   isWorn: 0
   texture: {fileID: 5743048449777930236, guid: 64d39684b978c0f4bbbd8d9866f55148, type: 3}
   level: 0
+  price: 200
+  category: forearm_armor
   category: forearm_armor
   equipped: 1
   armorPoint: 3
-  pair: {fileID: -2635902445533773543, guid: 64d39684b978c0f4bbbd8d9866f55148, type: 3}
+  pair: {fileID: 5898900664554095057, guid: 64d39684b978c0f4bbbd8d9866f55148, type: 3}

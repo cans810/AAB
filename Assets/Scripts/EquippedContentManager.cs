@@ -20,10 +20,6 @@ public class EquippedContentManager : MonoBehaviour
     GameObject currentSelectedButton;
     List<Item> equippedItemsInventory;
 
-    void Awake(){
-        
-    }
-
     private void OnEnable(){
         unEquipButton.SetActive(false);
         selectedItemImage.SetActive(false);
@@ -115,6 +111,7 @@ public class EquippedContentManager : MonoBehaviour
         equippedItemsInventory.Remove(currentSelectedItem);
         playerInventory.Add(currentSelectedItem);
         selectedItemImage.SetActive(false);
+        unEquipButton.SetActive(false);
         Destroy(currentSelectedButton);
     }
 }

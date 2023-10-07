@@ -69,10 +69,10 @@ public class EquipmentManager : MonoBehaviour
                 }
             } 
             if (gameObject.name.Equals("pants")){
-                if (entity.GetComponent<EntityEquipment>().ChestplateWorn != null){
-                    GetComponent<SpriteRenderer>().sprite = entity.GetComponent<EntityEquipment>().ChestplateWorn.pair;
+                if (entity.GetComponent<EntityEquipment>().LegWorn != null){
+                    GetComponent<SpriteRenderer>().sprite = entity.GetComponent<EntityEquipment>().LegWorn.pairExtra;
                 }
-                else if (entity.GetComponent<EntityEquipment>().ChestplateWorn == null){
+                else if (entity.GetComponent<EntityEquipment>().LegWorn == null){
                     GetComponent<SpriteRenderer>().sprite = null;
                 }
             } 
@@ -188,13 +188,13 @@ public class EquipmentManager : MonoBehaviour
                 }
             } 
             if (gameObject.name.Equals("pants")){
-                if (entity.GetComponent<EntityEquipment>().ChestplateWorn != null){
-                    GetComponent<SpriteRenderer>().sprite = entity.GetComponent<EntityEquipment>().ChestplateWorn.pair;
+                if (entity.GetComponent<EntityEquipment>().LegWorn != null){
+                    GetComponent<SpriteRenderer>().sprite = entity.GetComponent<EntityEquipment>().LegWorn.pairExtra;
                 }
-                else if (entity.GetComponent<EntityEquipment>().ChestplateWorn == null){
+                else if (entity.GetComponent<EntityEquipment>().LegWorn == null){
                     GetComponent<SpriteRenderer>().sprite = null;
                 }
-            } 
+            }
             if (gameObject.name.Equals("rightleg_armor")){
                 if (entity.GetComponent<EntityEquipment>().LegWorn != null){
                     GetComponent<SpriteRenderer>().sprite = entity.GetComponent<EntityEquipment>().LegWorn.texture;

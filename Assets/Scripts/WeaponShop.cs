@@ -32,10 +32,20 @@ public class WeaponShop : MonoBehaviour
         player = Player.Instance;
         playerInventory = player.GetComponent<EntityEquipment>().inventory;
 
+        player.GetComponent<Player>().transform.localScale = player.GetComponent<Player>().originalScale;
+        player.GetComponent<Player>().transform.position = new Vector3(2,-100f,0);
+        player.GetComponent<Player>().transform.localScale = new Vector3(player.GetComponent<Player>().transform.localScale.x, player.GetComponent<Player>().transform.localScale.y, 
+        player.GetComponent<Player>().transform.localScale.z);
+
+        // Freeze the Y-axis position
+        player.rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+
         PopulateInventoryUI();
     }
 
     private void OnDisable(){
+        player.rb.constraints = RigidbodyConstraints2D.None;
+
         currentSelectedItem = null;
 
         Button[] buttons = buttonContainer.GetComponentsInChildren<Button>();
@@ -82,16 +92,6 @@ public class WeaponShop : MonoBehaviour
         SwordManager.Instance.swords.Remove(currentSelectedItem);
         buyButton.SetActive(false);
         selectedItemImage.SetActive(false);
-    }
-
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
 

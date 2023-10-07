@@ -16,7 +16,10 @@ MonoBehaviour:
   isWorn: 0
   texture: {fileID: 7695575663953710401, guid: 64d39684b978c0f4bbbd8d9866f55148, type: 3}
   level: 0
+  price: 650
   category: chestplate
-  equipped: 0
+  category: chestplate
+  equipped: 1
   armorPoint: 9
-  pair: {fileID: -2330178813871308635, guid: 64d39684b978c0f4bbbd8d9866f55148, type: 3}
+  pair: {fileID: 0}
+  pairExtra: {fileID: 0}

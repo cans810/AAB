@@ -27,7 +27,7 @@ public class BattleSystem : MonoBehaviour
         player = Player.Instance;
         player.transform.position = new Vector3(-1,-3.5f,0);
 
-        enemy = RandomEnemyGenerator.Instance;
+        enemy = EnemyGeneratorController.Instance;
         playerLevelManagerGameObject = GameObject.Find("PlayerLevelManager");
 
         goToTownButton.SetActive(false);
@@ -35,10 +35,6 @@ public class BattleSystem : MonoBehaviour
 
         state = BattleState.START;
 
-        SetupBattle();
-    }
-
-    public void Start(){
         SetupBattle();
     }
 
@@ -55,6 +51,7 @@ public class BattleSystem : MonoBehaviour
                 }
                 else if (player.GetComponent<EntityAttributes>().HP > 0 && enemy.GetComponent<EntityAttributes>().HP <= 0){
                     state = BattleState.WON;
+                    applySlayedBoss();
                     playerLevelManagerGameObject.SetActive(true);
                     //SceneManager.LoadSceneAsync("TownScene");
                 }
@@ -161,6 +158,17 @@ public class BattleSystem : MonoBehaviour
             player.GetComponent<ActionsManager>().side = "left";
             enemy.GetComponent<EnemyActionsManager>().side = "right";
         }
+    }
+
+    public void applySlayedBoss(){
+
+        if (enemy.name.Equals("RomulusTheLeatherman(Clone)")){
+            EnemyGeneratorController.SlainRomulusTheLeatherman = true;
+        }
+        else if (enemy.name.Equals("Ferullus(Clone)")){
+            EnemyGeneratorController.SlainFerullus = true;
+        }
+
     }
 
     private IEnumerator WaitAndTransition(float waitTime, BattleState nextState)

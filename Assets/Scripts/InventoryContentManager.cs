@@ -20,11 +20,7 @@ public class InventoryContentManager : MonoBehaviour
     Item currentSelectedItem;
     GameObject currentSelectedButton;
     List<Item> equippedItemsInventory;
-
-    void Awake(){
-        
-    }
-
+    
     private void OnEnable(){
         equipButton.SetActive(false);
         selectedItemImage.SetActive(false);
@@ -77,16 +73,6 @@ public class InventoryContentManager : MonoBehaviour
         selectedItemImage.SetActive(true);
     }
 
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void equipItem(){
         if (currentSelectedItem is Weapon weapon)
         {
@@ -103,27 +89,69 @@ public class InventoryContentManager : MonoBehaviour
             selectedItemImage.SetActive(false);
             Destroy(currentSelectedButton);
         }
+
         if (currentSelectedItem is Armor armor)
         {
             if (armor.category.Equals("helmet")){
+                if (player.GetComponent<EntityEquipment>().HelmetWorn != null){
+                    playerInventory.Add(player.GetComponent<EntityEquipment>().HelmetWorn);
+                    player.GetComponent<EntityEquipment>().HelmetWorn.isWorn = false;
+                    equippedItemsInventory.Remove(player.GetComponent<EntityEquipment>().HelmetWorn);
+                }
+                
                 player.GetComponent<EntityEquipment>().HelmetWorn = armor;
             }
             if (armor.category.Equals("chestplate")){
+                if (player.GetComponent<EntityEquipment>().ChestplateWorn != null){
+                    playerInventory.Add(player.GetComponent<EntityEquipment>().ChestplateWorn);
+                    player.GetComponent<EntityEquipment>().ChestplateWorn.isWorn = false;
+                    equippedItemsInventory.Remove(player.GetComponent<EntityEquipment>().ChestplateWorn);
+                }
+
                 player.GetComponent<EntityEquipment>().ChestplateWorn = armor;
             }
             if (armor.category.Equals("arm_armor")){
+                if (player.GetComponent<EntityEquipment>().ArmWorn != null){
+                    playerInventory.Add(player.GetComponent<EntityEquipment>().ArmWorn);
+                    player.GetComponent<EntityEquipment>().ArmWorn.isWorn = false;
+                    equippedItemsInventory.Remove(player.GetComponent<EntityEquipment>().ArmWorn);
+                }
                 player.GetComponent<EntityEquipment>().ArmWorn = armor;
             }
             if (armor.category.Equals("forearm_armor")){
+                if (player.GetComponent<EntityEquipment>().ForearmWorn != null){
+                    playerInventory.Add(player.GetComponent<EntityEquipment>().ForearmWorn);
+                    player.GetComponent<EntityEquipment>().ForearmWorn.isWorn = false;
+                    equippedItemsInventory.Remove(player.GetComponent<EntityEquipment>().ForearmWorn);
+                }
+
                 player.GetComponent<EntityEquipment>().ForearmWorn = armor;
             }
             if (armor.category.Equals("leg_armor")){
+                if (player.GetComponent<EntityEquipment>().LegWorn != null){
+                    playerInventory.Add(player.GetComponent<EntityEquipment>().LegWorn);
+                    player.GetComponent<EntityEquipment>().LegWorn.isWorn = false;
+                    equippedItemsInventory.Remove(player.GetComponent<EntityEquipment>().LegWorn);
+                }
+
                 player.GetComponent<EntityEquipment>().LegWorn = armor;
             }
             if (armor.category.Equals("calf_armor")){
+                if (player.GetComponent<EntityEquipment>().CalfWorn != null){
+                    playerInventory.Add(player.GetComponent<EntityEquipment>().CalfWorn);
+                    player.GetComponent<EntityEquipment>().CalfWorn.isWorn = false;
+                    equippedItemsInventory.Remove(player.GetComponent<EntityEquipment>().CalfWorn);
+                }
+
                 player.GetComponent<EntityEquipment>().CalfWorn = armor;
             }
             if (armor.category.Equals("foot_armor")){
+                if (player.GetComponent<EntityEquipment>().FootWorn != null){
+                    playerInventory.Add(player.GetComponent<EntityEquipment>().FootWorn);
+                    player.GetComponent<EntityEquipment>().FootWorn.isWorn = false;
+                    equippedItemsInventory.Remove(player.GetComponent<EntityEquipment>().FootWorn);
+                }
+
                 player.GetComponent<EntityEquipment>().FootWorn = armor;
             }
 
@@ -131,25 +159,18 @@ public class InventoryContentManager : MonoBehaviour
             playerInventory.Remove(armor);
             equippedItemsInventory.Add(armor);
             selectedItemImage.SetActive(false);
+            equipButton.SetActive(false);
             Destroy(currentSelectedButton);
+
+            currentSelectedItem = null;
+
+            Button[] buttons = buttonContainer.GetComponentsInChildren<Button>();
+            foreach (Button button in buttons)
+            {
+                Destroy(button.gameObject);
+            }
+
+            PopulateInventoryUI();
         }
     }
 }
-
-/*public class ButtonClickHandler : MonoBehaviour, IPointerClickHandler
-{
-    private InventoryContentManager parentScript; // Reference to the parent script
-
-    public void Initialize(InventoryContentManager parent)
-    {
-        parentScript = parent;
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        
-        parentScript.currentSelectedItem = gameObject;
-        Debug.Log(gameObject.name);
-        // You can add your own custom click behavior here
-    }
-}*/

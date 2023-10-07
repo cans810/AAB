@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c602fa976c953e4d852e4a2c32f0d28, type: 3}
+  m_Name: RightlegArmor_02
+  m_EditorClassIdentifier: 
+  itemName: RightlegArmor_02
+  isWorn: 0
+  texture: {fileID: 5241712628546248766, guid: 64d39684b978c0f4bbbd8d9866f55148, type: 3}
+  level: 0
+  price: 500
+  category: leg_armor
+  category: leg_armor
+  equipped: 1
+  armorPoint: 7
+  pair: {fileID: -2893704747140793739, guid: 64d39684b978c0f4bbbd8d9866f55148, type: 3}
+  pairExtra: {fileID: -1724814921052093052, guid: 64d39684b978c0f4bbbd8d9866f55148, type: 3}

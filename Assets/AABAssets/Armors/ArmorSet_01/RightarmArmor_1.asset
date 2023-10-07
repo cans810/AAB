@@ -16,6 +16,7 @@ MonoBehaviour:
   isWorn: 0
   texture: {fileID: 7473019857110267525, guid: 64d39684b978c0f4bbbd8d9866f55148, type: 3}
   level: 0
+  price: 250
   category: arm_armor
   equipped: 1
   armorPoint: 4

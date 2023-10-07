@@ -7,12 +7,13 @@ using UnityEngine;
 public class Weapon : Item
 {
     public string category;
-
     public bool equipped;
-    public Weapon(string itemName,Sprite texture,string category,int level){
+    public int meleeDamage;
+    public Weapon(string itemName,Sprite texture,string category,int level,int price){
         this.itemName = itemName;
         this.texture = texture;
         this.category = category;
         this.level = level;
+        this.price = price;
     }
 }

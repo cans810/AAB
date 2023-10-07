@@ -10,6 +10,7 @@ public class PlayerHUD : MonoBehaviour
     public TMP_Text nameField;
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI spText;
+    public GameObject armorText;
     public Image healthBar;
     public Image staminaBar;
     public Image armorBar;
@@ -37,10 +38,13 @@ public class PlayerHUD : MonoBehaviour
         if (player.GetComponent<EntityAttributes>().maxArmorPoint == 0){
             armorBar.fillAmount = 0;
             armorBarOutline.SetActive(false);
+            armorText.SetActive(false);
         }
         else{
             armorBarOutline.SetActive(true);
+            armorText.SetActive(true);
             armorBar.fillAmount = player.GetComponent<EntityAttributes>().armorPoint / player.GetComponent<EntityAttributes>().maxArmorPoint;
+            armorText.GetComponent<TextMeshProUGUI>().text = player.GetComponent<EntityAttributes>().armorPoint.ToString();
         }
 
         hpText.text = player.GetComponent<EntityAttributes>().HP.ToString();

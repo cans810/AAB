@@ -16,6 +16,8 @@ MonoBehaviour:
   isWorn: 0
   texture: {fileID: 616736350669211442, guid: 64d39684b978c0f4bbbd8d9866f55148, type: 3}
   level: 0
+  price: 275
   category: helmet
   equipped: 0
   armorPoint: 4
+  pair: {fileID: 0}

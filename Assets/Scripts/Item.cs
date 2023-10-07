@@ -10,4 +10,6 @@ public class Item : ScriptableObject
     public bool isWorn;
     public Sprite texture;
     public int level;
+    public int price;
+    public string category;
 }

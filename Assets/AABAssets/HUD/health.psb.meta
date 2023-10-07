@@ -93,7 +93,7 @@ ScriptedImporter:
     spritePosition: {x: 0, y: 0}
   mosaicSpriteImportData: []
   rigSpriteImportData:
-  - name: health_inner
+  - name: outline
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -101,7 +101,29 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 4
+      y: 399
+      width: 379
+      height: 366
+    spriteID: 7c7a11582ec20894098cf069c8200b39
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 399}
+    spritePosition: {x: 1172, y: 994}
+  - name: health_inner
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 391
+      y: 399
       width: 379
       height: 366
     spriteID: f26229c66e766384f91579075b0e0f49
@@ -113,9 +135,9 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 4, y: 4}
-    spritePosition: {x: 10, y: 0}
-  - name: outline
+    uvTransform: {x: 391, y: 399}
+    spritePosition: {x: 696, y: 994}
+  - name: table
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -123,10 +145,10 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 378
-      width: 379
-      height: 366
-    spriteID: f467f31a5895f3c4e89eb3532c07e38e
+      y: 4
+      width: 1832
+      height: 387
+    spriteID: 815f1fda269a9ad47871f6338463008c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -135,8 +157,8 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 4, y: 378}
-    spritePosition: {x: 10, y: 0}
+    uvTransform: {x: 4, y: 4}
+    spritePosition: {x: 20, y: 921}
   characterData:
     bones: []
     parts: []
@@ -167,23 +189,33 @@ ScriptedImporter:
   resliceFromLayer: 0
   mosaicPSDLayers: []
   rigPSDLayers:
+  - name: outline
+    spriteName: outline
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 7c7a11582ec20894098cf069c8200b39
+    layerID: 15
+    mosaicPosition: {x: 4, y: 399}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
   - name: health_inner
     spriteName: health_inner
     isGroup: 0
     parentIndex: -1
     spriteID: f26229c66e766384f91579075b0e0f49
     layerID: 5
-    mosaicPosition: {x: 4, y: 4}
+    mosaicPosition: {x: 391, y: 399}
     flatten: 0
     isImported: 1
     isVisible: 1
-  - name: outline
-    spriteName: outline
+  - name: table
+    spriteName: table
     isGroup: 0
     parentIndex: -1
-    spriteID: f467f31a5895f3c4e89eb3532c07e38e
-    layerID: 2
-    mosaicPosition: {x: 4, y: 378}
+    spriteID: 815f1fda269a9ad47871f6338463008c
+    layerID: 6
+    mosaicPosition: {x: 4, y: 4}
     flatten: 0
     isImported: 1
     isVisible: 1

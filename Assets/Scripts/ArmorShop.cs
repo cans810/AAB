@@ -79,10 +79,20 @@ public class ArmorShop : MonoBehaviour
         player = Player.Instance;
         playerInventory = player.GetComponent<EntityEquipment>().inventory;
 
+        player.GetComponent<Player>().transform.localScale = player.GetComponent<Player>().originalScale;
+        player.GetComponent<Player>().transform.position = new Vector3(2,-100f,0);
+        player.GetComponent<Player>().transform.localScale = new Vector3(player.GetComponent<Player>().transform.localScale.x, player.GetComponent<Player>().transform.localScale.y, 
+        player.GetComponent<Player>().transform.localScale.z);
+
+        // Freeze the Y-axis position
+        player.rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+
         PopulateArmorsUI();
     }
 
     private void OnDisable(){
+        player.rb.constraints = RigidbodyConstraints2D.None;
+
         currentSelectedItem = null;
         helmetsList.SetActive(false);
         chestplatesList.SetActive(false);
@@ -141,7 +151,7 @@ public class ArmorShop : MonoBehaviour
 
     public void PopulateArmorsUI()
     {
-        foreach (Item item in HelmetManager.Instance.helmets)
+        foreach (Armor item in HelmetManager.Instance.helmets)
         {
             // Instantiate the button prefab
             GameObject buttonObject = Instantiate(buttonPrefab, buttonContainerHelmets);
@@ -150,13 +160,13 @@ public class ArmorShop : MonoBehaviour
             TextMeshProUGUI buttonText = buttonObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
             // Set the text of the button using the item's name
-            buttonText.text = item.itemName;
+            buttonText.text = item.itemName + ", " + item.price + " gold, " + item.armorPoint + " armor";
             
             // Add functionality to the button, e.g., OnClick event
             buttonObject.GetComponent<Button>().onClick.AddListener(() => OnItemClick(item, buttonObject));
         }
 
-        foreach (Item item in ChestplateManager.Instance.chestplates)
+        foreach (Armor item in ChestplateManager.Instance.chestplates)
         {
             // Instantiate the button prefab
             GameObject buttonObject = Instantiate(buttonPrefab, buttonContainerChestplates);
@@ -165,13 +175,13 @@ public class ArmorShop : MonoBehaviour
             TextMeshProUGUI buttonText = buttonObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
             // Set the text of the button using the item's name
-            buttonText.text = item.itemName;
+            buttonText.text = item.itemName + ", " + item.price + " gold, " + item.armorPoint + " armor";
             
             // Add functionality to the button, e.g., OnClick event
             buttonObject.GetComponent<Button>().onClick.AddListener(() => OnItemClick(item, buttonObject));
         }
 
-        foreach (Item item in ArmArmorManager.Instance.armArmors)
+        foreach (Armor item in ArmArmorManager.Instance.armArmors)
         {
             // Instantiate the button prefab
             GameObject buttonObject = Instantiate(buttonPrefab, buttonContainerArmArmors);
@@ -180,13 +190,13 @@ public class ArmorShop : MonoBehaviour
             TextMeshProUGUI buttonText = buttonObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
             // Set the text of the button using the item's name
-            buttonText.text = item.itemName;
+            buttonText.text = item.itemName + ", " + item.price + " gold, " + item.armorPoint + " armor";
             
             // Add functionality to the button, e.g., OnClick event
             buttonObject.GetComponent<Button>().onClick.AddListener(() => OnItemClick(item, buttonObject));
         }
 
-        foreach (Item item in ForearmArmorManager.Instance.foreArmArmors)
+        foreach (Armor item in ForearmArmorManager.Instance.foreArmArmors)
         {
             // Instantiate the button prefab
             GameObject buttonObject = Instantiate(buttonPrefab, buttonContainerForearmArmors);
@@ -195,13 +205,13 @@ public class ArmorShop : MonoBehaviour
             TextMeshProUGUI buttonText = buttonObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
             // Set the text of the button using the item's name
-            buttonText.text = item.itemName;
+            buttonText.text = item.itemName + ", " + item.price + " gold, " + item.armorPoint + " armor";
             
             // Add functionality to the button, e.g., OnClick event
             buttonObject.GetComponent<Button>().onClick.AddListener(() => OnItemClick(item, buttonObject));
         }
 
-        foreach (Item item in LegArmorManager.Instance.legArmors)
+        foreach (Armor item in LegArmorManager.Instance.legArmors)
         {
             // Instantiate the button prefab
             GameObject buttonObject = Instantiate(buttonPrefab, buttonContainerLegArmors);
@@ -210,13 +220,13 @@ public class ArmorShop : MonoBehaviour
             TextMeshProUGUI buttonText = buttonObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
             // Set the text of the button using the item's name
-            buttonText.text = item.itemName;
+            buttonText.text = item.itemName + ", " + item.price + " gold, " + item.armorPoint + " armor";
             
             // Add functionality to the button, e.g., OnClick event
             buttonObject.GetComponent<Button>().onClick.AddListener(() => OnItemClick(item, buttonObject));
         }
 
-        foreach (Item item in CalfArmorManager.Instance.calfArmors)
+        foreach (Armor item in CalfArmorManager.Instance.calfArmors)
         {
             // Instantiate the button prefab
             GameObject buttonObject = Instantiate(buttonPrefab, buttonContainerCalfArmors);
@@ -225,13 +235,13 @@ public class ArmorShop : MonoBehaviour
             TextMeshProUGUI buttonText = buttonObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
             // Set the text of the button using the item's name
-            buttonText.text = item.itemName;
+            buttonText.text = item.itemName + ", " + item.price + " gold, " + item.armorPoint + " armor";
             
             // Add functionality to the button, e.g., OnClick event
             buttonObject.GetComponent<Button>().onClick.AddListener(() => OnItemClick(item, buttonObject));
         }
 
-        foreach (Item item in FootArmorManager.Instance.footArmors)
+        foreach (Armor item in FootArmorManager.Instance.footArmors)
         {
             // Instantiate the button prefab
             GameObject buttonObject = Instantiate(buttonPrefab, buttonContainerFootArmors);
@@ -240,7 +250,7 @@ public class ArmorShop : MonoBehaviour
             TextMeshProUGUI buttonText = buttonObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
             // Set the text of the button using the item's name
-            buttonText.text = item.itemName;
+            buttonText.text = item.itemName + ", " + item.price + " gold, " + item.armorPoint + " armor";
             
             // Add functionality to the button, e.g., OnClick event
             buttonObject.GetComponent<Button>().onClick.AddListener(() => OnItemClick(item, buttonObject));
@@ -263,25 +273,26 @@ public class ArmorShop : MonoBehaviour
     public void buyItem(){
         Destroy(currentSelectedButton);
         playerInventory.Add(currentSelectedItem);
-        if (currentSelectedItem.itemName.Contains("helmet")){
+
+        if (currentSelectedItem.category.Contains("helmet")){
             HelmetManager.Instance.helmets.Remove(currentSelectedItem);
         }
-        else if (currentSelectedItem.itemName.Contains("chestplate")){
+        else if (currentSelectedItem.category.Contains("chestplate")){
             ChestplateManager.Instance.chestplates.Remove(currentSelectedItem);
         }
-        else if (currentSelectedItem.itemName.Contains("ArmArmor") && !currentSelectedItem.itemName.Contains("ForearmArmor")){
+        else if (currentSelectedItem.category.Contains("arm_armor") && !currentSelectedItem.category.Contains("forearm_armor")){
             ArmArmorManager.Instance.armArmors.Remove(currentSelectedItem);
         }
-        else if (currentSelectedItem.itemName.Contains("ForearmArmor")){
+        else if (currentSelectedItem.category.Contains("forearm_armor")){
             ForearmArmorManager.Instance.foreArmArmors.Remove(currentSelectedItem);
         }
-        else if (currentSelectedItem.itemName.Contains("LegArmor")){
+        else if (currentSelectedItem.category.Contains("leg_armor")){
             LegArmorManager.Instance.legArmors.Remove(currentSelectedItem);
         }
-        else if (currentSelectedItem.itemName.Contains("CalfArmor")){
+        else if (currentSelectedItem.category.Contains("calf_armor")){
             CalfArmorManager.Instance.calfArmors.Remove(currentSelectedItem);
         }
-        else if (currentSelectedItem.itemName.Contains("FootArmor")){
+        else if (currentSelectedItem.category.Contains("foot_armor")){
             FootArmorManager.Instance.footArmors.Remove(currentSelectedItem);
         }
         
@@ -437,6 +448,9 @@ public class ArmorShop : MonoBehaviour
     }
 
     public void goBack(){
+        selectedItemImage.SetActive(false);
+        buyButton.SetActive(false);
+
         helmetsList.SetActive(false);
         helmetsButton.SetActive(true);
 
@@ -460,16 +474,5 @@ public class ArmorShop : MonoBehaviour
 
 
         goBackButton.SetActive(false);
-    }
-    
-
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

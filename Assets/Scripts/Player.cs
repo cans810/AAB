@@ -16,6 +16,8 @@ public class Player : Entity
     public Vector3 showcaseScale = new Vector3(0.33f,0.33f,0.33f);
 
     public static Player Instance { get; private set; }
+
+    public int goldBalance;
     
     private void Awake()
     {
@@ -55,6 +57,8 @@ public class Player : Entity
 
         //transform.localScale = transform.localScale/1.450000045000004500000450000045f;
         transform.position = new Vector3(0.5f,-4.119578f,0);
+
+        goldBalance = 1500;
     }
 
     public void resetBeforeBattle(){
@@ -69,6 +73,7 @@ public class Player : Entity
         gameObject.GetComponent<ActionsManager>().canAttack_Melee = false;
 
         gameObject.GetComponent<EntityAttributes>().calculateMaxArmorPoint();
+        gameObject.GetComponent<EntityAttributes>().updatePowerValue();
         //Debug.Log("resetted");
     }
 
