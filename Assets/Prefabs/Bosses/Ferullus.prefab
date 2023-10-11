@@ -3000,6 +3000,7 @@ GameObject:
   - component: {fileID: 4183762106723685029}
   - component: {fileID: 3115918313633047470}
   - component: {fileID: 7399529811267655834}
+  - component: {fileID: -8145075922112818011}
   - component: {fileID: 7328068993865326040}
   - component: {fileID: 7990263062717521904}
   - component: {fileID: 3255234000112357991}
@@ -3211,6 +3212,9 @@ MonoBehaviour:
   surrendering: 0
   dying: 0
   intimidating: 0
+  movingNextToEnemyToSacrifice: 0
+  sacrificialAttack: 0
+  sparing: 0
   showcaseAnim: 0
   inAction: 0
   played: 0
@@ -3295,6 +3299,18 @@ MonoBehaviour:
   hitbox: {fileID: 4470450029089493520}
   originalScale: {x: 0.33, y: 0.33, z: 0.33}
   showcaseScale: {x: 0.5, y: 0.5, z: 0.5}
+--- !u!114 &-8145075922112818011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5694792277753521394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c1a34a30dca5640bc05910174f7abd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7328068993865326040
 MonoBehaviour:
   m_ObjectHideFlags: 0

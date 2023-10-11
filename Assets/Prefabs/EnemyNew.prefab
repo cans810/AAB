@@ -1565,6 +1565,7 @@ GameObject:
   - component: {fileID: 4506818518606737244}
   - component: {fileID: 5600930642025270664}
   - component: {fileID: 4971995161508372847}
+  - component: {fileID: 4280576399507768045}
   - component: {fileID: 6067000755969118308}
   - component: {fileID: 1855429244347099984}
   - component: {fileID: 1926733414603304466}
@@ -1773,9 +1774,13 @@ MonoBehaviour:
   attackingMedium: 0
   attackingHeavy: 0
   attackingLeaping: 0
+  blockingMelee: 0
   surrendering: 0
   dying: 0
   intimidating: 0
+  movingNextToEnemyToSacrifice: 0
+  sacrificialAttack: 0
+  showcaseAnim: 0
   inAction: 0
   played: 0
   canAttack_Melee: 0
@@ -1796,6 +1801,18 @@ MonoBehaviour:
   - {fileID: -1327075493964502159}
   - {fileID: 8903293751285784392}
   amountGotHit: 0
+--- !u!114 &4280576399507768045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3461105777929443128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c1a34a30dca5640bc05910174f7abd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6067000755969118308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1810,6 +1827,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   xp: 0
+  PowerValue: 0
   strength: 0
   stamina: 0
   dexterity: 0
@@ -1822,12 +1840,21 @@ MonoBehaviour:
   heightInCm: 170
   baseHitDamage: 0
   hitDamage: 0
-  heightChange: 0
+  baseHitChance_light: 0
+  baseHitChance_medium: 0
+  baseHitChance_heavy: 0
+  baseHitChance_leap: 0
+  hitChance_light: 0
+  hitChance_medium: 0
+  hitChance_heavy: 0
+  hitChance_leap: 0
   destinationX: 0
   moveSpeed: 0
   energy: 0
   maxHP: 0
   HP: 0
+  maxSP: 0
+  SP: 0
   maxArmorPoint: 0
   armorPoint: 0
   baseStepSize: 0
