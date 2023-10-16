@@ -16,6 +16,8 @@ public class Enemy : Entity
     public Vector3 showcaseScale = new Vector3(0.33f,0.33f,0.33f);
 
     public static Enemy Instance { get; private set; }
+
+    public bool isABoss;
     
     private void Awake()
     {
@@ -65,7 +67,8 @@ public class Enemy : Entity
         gameObject.GetComponent<EntityAttributes>().SP = gameObject.GetComponent<EntityAttributes>().maxSP;
 
         gameObject.GetComponent<EnemyActionsManager>().inAction = false;
-        gameObject.GetComponent<EnemyActionsManager>().played = true;
+        gameObject.GetComponent<EnemyActionsManager>().inReactionAction = false;
+        gameObject.GetComponent<EnemyActionsManager>().played = false;
         gameObject.GetComponent<EnemyActionsManager>().canAttack_Melee = false;
         gameObject.GetComponent<EnemyActionsManager>().endBattle = false;
 
@@ -80,6 +83,7 @@ public class Enemy : Entity
         gameObject.GetComponent<EntityAttributes>().SP = gameObject.GetComponent<EntityAttributes>().maxSP;
 
         gameObject.GetComponent<EnemyActionsManager>().inAction = false;
+        gameObject.GetComponent<EnemyActionsManager>().inReactionAction = false;
         gameObject.GetComponent<EnemyActionsManager>().played = false;
         gameObject.GetComponent<EnemyActionsManager>().canAttack_Melee = false;
         gameObject.GetComponent<EnemyActionsManager>().movingLeft = false;

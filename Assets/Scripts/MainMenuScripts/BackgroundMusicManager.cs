@@ -27,6 +27,7 @@ public class BackgroundMusicManager : MonoBehaviour
 
     private void Start()
     {
+        backgroundMusic.Play();
         initialVolume = backgroundMusic.volume;
     }
 

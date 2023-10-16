@@ -8,34 +8,44 @@ using UnityEngine.UI;
 public class EnemyCreator : MonoBehaviour
 {
     private GameObject enemy;
-    public bool isEnemyABoss;
 
     public GameObject ShowcaseEnemy;
     public GameObject BossShowcase;
+
+    public GameObject TournamentManagerObject;
 
     void Awake(){
         GameObject player = GameObject.Find("Player");
 
         GameObject enemyGenerator = GameObject.Find("GladiatorGenerator");
+        
+        TournamentManagerObject = GameObject.Find("TournamentManager");
+        TournamentManager tournamentManager = TournamentManagerObject.GetComponent<TournamentManager>();
 
-        if(player.GetComponent<EntityAttributes>().level == 2 && !EnemyGeneratorController.SlainRomulusTheLeatherman){
-            isEnemyABoss = true;
-            enemyGenerator.GetComponent<EnemyGeneratorController>().generateRomulusTheLeatherman();
-        }
-        else if(player.GetComponent<EntityAttributes>().level == 3 && !EnemyGeneratorController.SlainFerullus){
-            isEnemyABoss = true;
-            enemyGenerator.GetComponent<EnemyGeneratorController>().generateFerullus();
-        }
-        else{
-            isEnemyABoss = false;
+        if (player.GetComponent<Player>().inATournament && tournamentManager.enemysToBeat != 0){
             enemyGenerator.GetComponent<EnemyGeneratorController>().generateRandomEnemy();
+            EnemyGeneratorController.Instance.GetComponent<Enemy>().isABoss = false;
+        }
+        // RomulusTheLeatherman
+        else if(player.GetComponent<Player>().inATournament && tournamentManager.currentTournament.Equals("first") && !EnemyGeneratorController.SlainRomulusTheLeatherman && tournamentManager.enemysToBeat == 0){
+            enemyGenerator.GetComponent<EnemyGeneratorController>().generateRomulusTheLeatherman();
+            EnemyGeneratorController.Instance.GetComponent<Enemy>().isABoss = true;
+        }
+        // Ferullus
+        else if(player.GetComponent<Player>().inATournament && tournamentManager.currentTournament.Equals("second") && !EnemyGeneratorController.SlainFerullus && tournamentManager.enemysToBeat == 0){
+            enemyGenerator.GetComponent<EnemyGeneratorController>().generateFerullus();
+            EnemyGeneratorController.Instance.GetComponent<Enemy>().isABoss = true;
+        }
+        else if (!player.GetComponent<Player>().inATournament){
+            enemyGenerator.GetComponent<EnemyGeneratorController>().generateRandomEnemy();
+            EnemyGeneratorController.Instance.GetComponent<Enemy>().isABoss = false;
         }
 
         enemy = EnemyGeneratorController.Instance;
 
         enemy.GetComponent<EntityAttributes>().updatePowerValue();
 
-        if (isEnemyABoss){
+        if (EnemyGeneratorController.Instance.GetComponent<Enemy>().isABoss == true){
             ShowcaseEnemy.SetActive(false);
             BossShowcase.SetActive(true);
         }

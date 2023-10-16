@@ -18,6 +18,7 @@ public class Player : Entity
     public static Player Instance { get; private set; }
 
     public int goldBalance;
+    public bool inATournament;
     
     private void Awake()
     {
@@ -69,6 +70,7 @@ public class Player : Entity
         gameObject.GetComponent<EntityAttributes>().SP = gameObject.GetComponent<EntityAttributes>().maxSP;
 
         gameObject.GetComponent<ActionsManager>().inAction = false;
+        gameObject.GetComponent<ActionsManager>().inReactionAction = false;
         gameObject.GetComponent<ActionsManager>().played = false;
         gameObject.GetComponent<ActionsManager>().canAttack_Melee = false;
         gameObject.GetComponent<ActionsManager>().endBattle = false;
@@ -79,12 +81,15 @@ public class Player : Entity
     }
 
     public void resetAfterBattle(){
+        gameObject.GetComponent<ActionsManager>().stopSurrender();
+        gameObject.GetComponent<ActionsManager>().stopDeath();
+        gameObject.GetComponent<ActionsManager>().inAction = false;
+        gameObject.GetComponent<ActionsManager>().inReactionAction = false;
         gameObject.GetComponent<ActionsManager>().side = "left";
         gameObject.GetComponent<Player>().animator.SetBool("Idle",true);
         gameObject.GetComponent<EntityAttributes>().HP = gameObject.GetComponent<EntityAttributes>().maxHP;
         gameObject.GetComponent<EntityAttributes>().SP = gameObject.GetComponent<EntityAttributes>().maxSP;
 
-        gameObject.GetComponent<ActionsManager>().inAction = false;
         gameObject.GetComponent<ActionsManager>().played = false;
         gameObject.GetComponent<ActionsManager>().canAttack_Melee = false;
         gameObject.GetComponent<ActionsManager>().movingLeft = false;
@@ -101,12 +106,8 @@ public class Player : Entity
         gameObject.GetComponent<ActionsManager>().surrendering = false;
         gameObject.GetComponent<ActionsManager>().dying = false;
         gameObject.GetComponent<ActionsManager>().intimidating = false;
-        gameObject.GetComponent<ActionsManager>().inAction = false;
-        gameObject.GetComponent<ActionsManager>().played = false;
         gameObject.GetComponent<ActionsManager>().canAttack_Melee = false;
         gameObject.GetComponent<ActionsManager>().canAttack_Leaping = false;
-        gameObject.GetComponent<ActionsManager>().stopSurrender();
-        gameObject.GetComponent<ActionsManager>().stopDeath();
 
         gameObject.GetComponent<EntityAttributes>().calculateMaxArmorPoint();
         gameObject.GetComponent<EntityAttributes>().updatePowerValue();

@@ -248,6 +248,20 @@ public class LevelUpScene : MonoBehaviour
     }
     
     public void goToTown(){
-        SceneManager.LoadSceneAsync("TownScene");
+        if (Player.Instance.inATournament){
+            continueToTournament();
+        }
+        else{
+            SceneManager.LoadSceneAsync("TownScene");
+        }
+    }
+
+    public void continueToTournament(){
+        TournamentManager.Instance.enemysToBeat -= 1;
+        if(EnemyGeneratorController.Instance != null){
+            Destroy(EnemyGeneratorController.Instance);
+        }
+        GameObject sceneLoader = GameObject.Find("SceneLoader");
+        sceneLoader.GetComponent<SceneLoader>().FadeToLevel("ShowcaseEnemy");
     }
 }

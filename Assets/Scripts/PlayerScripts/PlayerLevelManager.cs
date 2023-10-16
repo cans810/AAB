@@ -73,7 +73,7 @@ public class PlayerLevelManager : MonoBehaviour
     public void addXP(){
         GameObject enemyCreator = GameObject.Find("EnemyCreator");
         
-        if (enemyCreator.GetComponent<EnemyCreator>().isEnemyABoss && player.GetComponent<EntityAttributes>().level == 2){
+        if (EnemyGeneratorController.Instance.GetComponent<Enemy>().isABoss == true && player.GetComponent<EntityAttributes>().level == 2){
             int absXp = (int)(xpForLevel_3 - xp);
             xp += absXp;
             Debug.Log("filled the rest.");

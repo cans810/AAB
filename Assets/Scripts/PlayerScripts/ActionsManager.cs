@@ -24,6 +24,7 @@ public class ActionsManager : MonoBehaviour
     public bool sparing;
     public bool endBattle;
     public bool inAction;
+    public bool inReactionAction;
     public bool played;
     public bool canAttack_Melee;
     public bool canAttack_Leaping;
@@ -602,15 +603,15 @@ public class ActionsManager : MonoBehaviour
         if (willBeHit){
 
             if (gameObject.GetComponent<EntityAttributes>().armorPoint > 0){
+                inReactionAction = true;
+                gotHit = true;
+
                 float before = gameObject.GetComponent<EntityAttributes>().armorPoint;
                 gameObject.GetComponent<EntityAttributes>().armorPoint -= (int)damageValue;
 
                 if (gameObject.GetComponent<EntityAttributes>().armorPoint < 0) gameObject.GetComponent<EntityAttributes>().armorPoint = 0;
 
                 amountGotHit = before-gameObject.GetComponent<EntityAttributes>().armorPoint;
-
-                inAction = true;
-                gotHit = true;
 
                 int randomAnimation = UnityEngine.Random.Range(1, 3); // The upper bound is exclusive, so use 3 to include 2
                 if (randomAnimation == 1){
@@ -634,6 +635,9 @@ public class ActionsManager : MonoBehaviour
             }
 
             else{
+                inReactionAction = true;
+                gotHit = true;
+                
                 int randomGotHitSoundEffect = UnityEngine.Random.Range(0, gotHit_soundEffects.Length);
 
                 gotHit_soundEffects[randomGotHitSoundEffect].Play();
@@ -642,9 +646,6 @@ public class ActionsManager : MonoBehaviour
                 gameObject.GetComponent<EntityAttributes>().HP -= damageValue;
 
                 amountGotHit = before-gameObject.GetComponent<EntityAttributes>().HP;
-
-                inAction = true;
-                gotHit = true;
 
                 if (gameObject.GetComponent<EntityAttributes>().HP <= 0){
                     surrender();
@@ -674,7 +675,7 @@ public class ActionsManager : MonoBehaviour
             }
         }
         else{
-            inAction = true;
+            inReactionAction = true;
             blockingMelee = true;
             gameObject.GetComponent<Player>().animator.SetTrigger("Block_1");
         }
@@ -686,14 +687,14 @@ public class ActionsManager : MonoBehaviour
     }
 
     public void endGetHit(){
+        inReactionAction = false;
         gotHit = false;
-        inAction = false;
         changeEyes("eyesNormal");
         changeMouth("mouthNormal");
     }
 
     public void endBlock(){
-        inAction = false;
+        inReactionAction = false;
         blockingMelee = false;
         changeEyes("eyesNormal");
         changeMouth("mouthNormal");

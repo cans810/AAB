@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TownManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class TownManager : MonoBehaviour
     public GameObject arenaObject;
     public GameObject weaponShopObject;
     public GameObject armorShopObject;
+    public Button tournamentButton;
 
     GameObject enemyGenerator;
 
@@ -30,6 +32,12 @@ public class TownManager : MonoBehaviour
 
         // Freeze the Y-axis position
         playerObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
+
+        if (tournamentButton != null)
+        {
+            // Add an event listener to the button's onClick event
+            tournamentButton.onClick.AddListener(OnClick);
+        }
     }
 
     void OnDisable(){
@@ -87,9 +95,16 @@ public class TownManager : MonoBehaviour
     }
 
 
-    public void enterFirstBattle(){
+    public void enterBattle(){
         GameObject sceneLoader = GameObject.Find("SceneLoader");
-        sceneLoader.GetComponent<SceneLoader>().FadeToLevel("BattleScene");
+        sceneLoader.GetComponent<SceneLoader>().FadeToLevel("ShowcaseEnemy");
+    }
+
+    private void OnClick()
+    {
+        GameObject tournamentManager = GameObject.Find("TournamentManager");
+        tournamentManager.GetComponent<TournamentManager>().generateTournament();
+        playerObject.GetComponent<Player>().inATournament = true;
     }
 
 }

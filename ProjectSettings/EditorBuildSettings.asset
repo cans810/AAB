@@ -20,4 +20,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelUpScene.unity
     guid: 3610690649649854b970908164fec658
+  - enabled: 1
+    path: Assets/Scenes/ShowcaseEnemy.unity
+    guid: d9c6213cc132a2b4ab5f8162ca9de267
+  - enabled: 1
+    path: Assets/Scenes/TournamentScene.unity
+    guid: 9706c26bf19633b43b5738f2300f1e80
+  - enabled: 1
+    path: Assets/Scenes/GameIntro.unity
+    guid: b57a360368f232b4796e92eee094f81f
   m_configObjects: {}

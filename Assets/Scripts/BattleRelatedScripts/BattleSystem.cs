@@ -20,6 +20,9 @@ public class BattleSystem : MonoBehaviour
 
     public GameObject spareOrSacrifice;
 
+    public GameObject playerHUD;
+    public GameObject enemyHUD;
+
     public bool waitingInBetweenTurns;
 
     // Define a boolean flag to track if the turn has changed
@@ -36,6 +39,8 @@ public class BattleSystem : MonoBehaviour
         goToTownButton.SetActive(false);
         goToLevelUpSceneButton.SetActive(false);
         spareOrSacrifice.SetActive(false);
+        playerHUD.SetActive(true);
+        enemyHUD.SetActive(true);
 
         state = BattleState.START;
 
@@ -65,7 +70,7 @@ public class BattleSystem : MonoBehaviour
                 }
                 else if (player.GetComponent<EntityAttributes>().HP > 0 && enemy.GetComponent<EntityAttributes>().HP <= 0){
                     state = BattleState.WON;
-                    applySlayedBoss();
+                    editTournamentInfoNApplySlayedBoss();
 
                     if (!player.GetComponent<ActionsManager>().endBattle){
                         spareOrSacrifice.SetActive(true);
@@ -77,6 +82,8 @@ public class BattleSystem : MonoBehaviour
             if (player.GetComponent<ActionsManager>().endBattle || enemy.GetComponent<EnemyActionsManager>().endBattle){
                 playerLevelManagerGameObject.SetActive(true);
                 spareOrSacrifice.SetActive(false);
+                playerHUD.SetActive(false);
+                enemyHUD.SetActive(false);
             }
 
             if (state == BattleState.IN_AFTER_BATTLE_WAITING && PlayerLevelManager.leveledUP == false && !spareOrSacrifice.activeSelf){
@@ -96,7 +103,7 @@ public class BattleSystem : MonoBehaviour
                     playerActionsHUD.SetActive(false);
 
                 }
-                else if (state == BattleState.PLAYERTURN && !enemy.GetComponent<EnemyActionsManager>().inAction && !player.GetComponent<ActionsManager>().inAction){
+                else if (state == BattleState.PLAYERTURN && (!enemy.GetComponent<EnemyActionsManager>().inAction || !player.GetComponent<ActionsManager>().inAction)){
                     playerActionsHUD.SetActive(true);
 
                 }
@@ -116,19 +123,24 @@ public class BattleSystem : MonoBehaviour
                     hasTurnChanged = false;
                 }
 
-                if (!enemy.GetComponent<EnemyActionsManager>().inAction && !enemy.GetComponent<EnemyActionsManager>().played && !player.GetComponent<ActionsManager>().inAction) 
+                // !player.GetComponent<ActionsManager>().inAction vurduğumuz zaman enemy nin anında yanıt vermesi için önemli olabilir
+                if (!enemy.GetComponent<EnemyActionsManager>().inAction && !enemy.GetComponent<EnemyActionsManager>().inReactionAction 
+                && !enemy.GetComponent<EnemyActionsManager>().played && !player.GetComponent<ActionsManager>().inAction) 
                 {
                     enemy.GetComponent<EnemyBattleAI>().randomlyDoAnAction();
                 }
 
-                if (enemy.GetComponent<EnemyActionsManager>().played)
+                // !enemy.GetComponent<EnemyActionsManager>().inAction çok önemli
+                if (enemy.GetComponent<EnemyActionsManager>().played && (!enemy.GetComponent<EnemyActionsManager>().inAction && !enemy.GetComponent<EnemyActionsManager>().inReactionAction))
                 {
                     if (!waitingInBetweenTurns)
                     {
                         waitingInBetweenTurns = true;
-                        StartCoroutine(WaitAndTransition(0.02f, BattleState.PLAYERTURN));
+                        //StartCoroutine(WaitAndTransition(0f, BattleState.PLAYERTURN));
                         enemy.GetComponent<EnemyActionsManager>().inAction = false;
                         enemy.GetComponent<EnemyActionsManager>().played = false;
+                        StartCoroutine(WaitAndChangeTurn(0f));
+                        state = BattleState.PLAYERTURN;
                     }
                 }
             }
@@ -146,14 +158,16 @@ public class BattleSystem : MonoBehaviour
                     hasTurnChanged = true;
                 }
 
-                else if (player.GetComponent<ActionsManager>().played)
+                else if (player.GetComponent<ActionsManager>().played && !player.GetComponent<ActionsManager>().inAction)
                 {
                     if (!waitingInBetweenTurns)
                     {
                         waitingInBetweenTurns = true;
-                        StartCoroutine(WaitAndTransition(0.02f, BattleState.ENEMYTURN));
+                        //StartCoroutine(WaitAndTransition(0f, BattleState.ENEMYTURN));
                         player.GetComponent<ActionsManager>().inAction = false;
                         player.GetComponent<ActionsManager>().played = false;
+                        StartCoroutine(WaitAndChangeTurn(0f));
+                        state = BattleState.ENEMYTURN;
                     }
                 }
             }
@@ -183,12 +197,18 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    public void applySlayedBoss(){
+    public void editTournamentInfoNApplySlayedBoss(){
 
         if (enemy.name.Equals("RomulusTheLeatherman(Clone)")){
+            player.GetComponent<Player>().inATournament = false;
+            TournamentManager.Instance.currentTournament = TournamentManager.Instance.tournaments[1];
+            TournamentManager.Instance.canEnterCurrentTournament = false;
             EnemyGeneratorController.SlainRomulusTheLeatherman = true;
         }
         else if (enemy.name.Equals("Ferullus(Clone)")){
+            player.GetComponent<Player>().inATournament = false;
+            TournamentManager.Instance.currentTournament = TournamentManager.Instance.tournaments[2];
+            TournamentManager.Instance.canEnterCurrentTournament = false;
             EnemyGeneratorController.SlainFerullus = true;
         }
 
@@ -199,6 +219,13 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
 
         state = nextState;
+        waitingInBetweenTurns = false;
+    }
+
+    private IEnumerator WaitAndChangeTurn(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+
         waitingInBetweenTurns = false;
     }
 
