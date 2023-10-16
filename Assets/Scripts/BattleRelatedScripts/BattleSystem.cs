@@ -137,10 +137,12 @@ public class BattleSystem : MonoBehaviour
                     {
                         waitingInBetweenTurns = true;
                         //StartCoroutine(WaitAndTransition(0f, BattleState.PLAYERTURN));
-                        enemy.GetComponent<EnemyActionsManager>().inAction = false;
-                        enemy.GetComponent<EnemyActionsManager>().played = false;
-                        StartCoroutine(WaitAndChangeTurn(0f));
+                        
                         state = BattleState.PLAYERTURN;
+                        enemy.GetComponent<EnemyActionsManager>().inAction = false;
+                        enemy.GetComponent<EnemyActionsManager>().inReactionAction = false;
+                        enemy.GetComponent<EnemyActionsManager>().played = false;
+                        StartCoroutine(WaitAndChangeTurn(0.1f));
                     }
                 }
             }
@@ -158,16 +160,18 @@ public class BattleSystem : MonoBehaviour
                     hasTurnChanged = true;
                 }
 
-                else if (player.GetComponent<ActionsManager>().played && !player.GetComponent<ActionsManager>().inAction)
+                else if (player.GetComponent<ActionsManager>().played)
                 {
                     if (!waitingInBetweenTurns)
                     {
                         waitingInBetweenTurns = true;
                         //StartCoroutine(WaitAndTransition(0f, BattleState.ENEMYTURN));
-                        player.GetComponent<ActionsManager>().inAction = false;
-                        player.GetComponent<ActionsManager>().played = false;
-                        StartCoroutine(WaitAndChangeTurn(0f));
+                        
                         state = BattleState.ENEMYTURN;
+                        player.GetComponent<ActionsManager>().inAction = false;
+                        player.GetComponent<ActionsManager>().inReactionAction = false;
+                        player.GetComponent<ActionsManager>().played = false;
+                        StartCoroutine(WaitAndChangeTurn(0.1f));
                     }
                 }
             }

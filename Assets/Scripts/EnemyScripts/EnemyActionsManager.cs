@@ -52,7 +52,7 @@ public class EnemyActionsManager : MonoBehaviour
 
         inAction = false;
         inReactionAction = false;
-        played = true;
+        played = false;
 
         canAttack_Melee = false;
 
@@ -569,6 +569,7 @@ public class EnemyActionsManager : MonoBehaviour
         if (willBeHit){
 
             if (gameObject.GetComponent<EntityAttributes>().armorPoint > 0){
+                idle = false;
                 inReactionAction = true;
                 gotHit = true;
 
@@ -601,6 +602,7 @@ public class EnemyActionsManager : MonoBehaviour
             }
 
             else{
+                idle = false;
                 inReactionAction = true;
                 gotHit = true;
 
@@ -641,6 +643,7 @@ public class EnemyActionsManager : MonoBehaviour
             }
         }
         else{
+            idle = false;
             inReactionAction = true;
             blockingMelee = true;
             gameObject.GetComponent<Enemy>().animator.SetTrigger("Block_1");

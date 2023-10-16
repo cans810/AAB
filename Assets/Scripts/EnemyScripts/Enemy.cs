@@ -101,7 +101,6 @@ public class Enemy : Entity
         gameObject.GetComponent<EnemyActionsManager>().dying = false;
         gameObject.GetComponent<EnemyActionsManager>().intimidating = false;
         gameObject.GetComponent<EnemyActionsManager>().inAction = false;
-        gameObject.GetComponent<EnemyActionsManager>().played = false;
         gameObject.GetComponent<EnemyActionsManager>().canAttack_Melee = false;
         gameObject.GetComponent<EnemyActionsManager>().canAttack_Leaping = false;
         gameObject.GetComponent<EnemyActionsManager>().stopSurrender();
