@@ -120,9 +120,9 @@ TextureImporter:
       name: righthand_equipment_0
       rect:
         serializedVersion: 2
-        x: 130
+        x: 223
         y: 384
-        width: 253
+        width: 160
         height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

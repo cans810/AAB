@@ -787,7 +787,7 @@ public class ActionsManager : MonoBehaviour
 
             Debug.Log("Entity has hit right wall.");
         }
-        else if (collision.collider.CompareTag("Enemy"))
+        else if (collision.collider.CompareTag("Enemy") && (!attackingLeaping && !Enemy.Instance.GetComponent<EnemyActionsManager>().attackingLeaping))
         {
             // Handle collision with the ground (EdgeCollider2D)
             if (movingLeft){

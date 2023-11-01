@@ -311,7 +311,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 17
+  m_SortingOrder: 20
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1709,8 +1709,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f838e1e5c18047d42b73f695e78cc50b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eyeObject: {fileID: 3669123989550948877}
+  mouthObject: {fileID: 5471351256624442925}
   eyes_state: 
   mouth_state: 
+  eyeSprite: {fileID: 0}
+  mouthSprite: {fileID: 0}
 --- !u!114 &4506818518606737244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1780,8 +1784,11 @@ MonoBehaviour:
   intimidating: 0
   movingNextToEnemyToSacrifice: 0
   sacrificialAttack: 0
+  sparing: 0
+  endBattle: 0
   showcaseAnim: 0
   inAction: 0
+  inReactionAction: 0
   played: 0
   canAttack_Melee: 0
   canAttack_Leaping: 0
@@ -1876,6 +1883,7 @@ MonoBehaviour:
   hitbox: {fileID: 4685323216420872666}
   originalScale: {x: 0.33, y: 0.33, z: 0.33}
   showcaseScale: {x: 0.5, y: 0.5, z: 0.5}
+  isABoss: 0
 --- !u!114 &1926733414603304466
 MonoBehaviour:
   m_ObjectHideFlags: 0

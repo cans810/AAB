@@ -50,10 +50,6 @@ public class ArmorShop : MonoBehaviour
     Item currentSelectedItem;
     GameObject currentSelectedButton;
 
-    void Awake(){
-        
-    }
-
     private void OnEnable(){
         helmetsList.SetActive(false);
         chestplatesList.SetActive(false);
@@ -74,7 +70,6 @@ public class ArmorShop : MonoBehaviour
         legArmorsButton.SetActive(true);
         calfArmorsButton.SetActive(true);
         footArmorsButton.SetActive(true);
-
 
         player = Player.Instance;
         playerInventory = player.GetComponent<EntityEquipment>().inventory;

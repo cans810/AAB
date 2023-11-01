@@ -815,7 +815,7 @@ public class EnemyActionsManager : MonoBehaviour
             stopMovingRight();
             Debug.Log("Entity has hit right wall.");
         }
-        else if (collision.collider.CompareTag("Player"))
+        else if (collision.collider.CompareTag("Player") && (!attackingLeaping && !Player.Instance.GetComponent<ActionsManager>().attackingLeaping))
         {
             // Handle collision with the ground (EdgeCollider2D)
             if (movingLeft){

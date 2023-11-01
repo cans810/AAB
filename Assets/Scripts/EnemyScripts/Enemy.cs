@@ -86,6 +86,8 @@ public class Enemy : Entity
         gameObject.GetComponent<EnemyActionsManager>().inReactionAction = false;
         gameObject.GetComponent<EnemyActionsManager>().played = false;
         gameObject.GetComponent<EnemyActionsManager>().canAttack_Melee = false;
+        gameObject.GetComponent<EnemyActionsManager>().endBattle = false;
+        gameObject.GetComponent<EnemyActionsManager>().canAttack_Melee = false;
         gameObject.GetComponent<EnemyActionsManager>().movingLeft = false;
         gameObject.GetComponent<EnemyActionsManager>().movingRight = false;
         gameObject.GetComponent<EnemyActionsManager>().idle = true;

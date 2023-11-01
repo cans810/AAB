@@ -37,6 +37,7 @@ public class TownManager : MonoBehaviour
         {
             // Add an event listener to the button's onClick event
             tournamentButton.onClick.AddListener(OnClick);
+            tournamentButton.onClick.AddListener(enterTournament);
         }
     }
 
@@ -92,6 +93,11 @@ public class TownManager : MonoBehaviour
         arenaObject.SetActive(false);
         armorShopObject.SetActive(true);
         weaponShopObject.SetActive(false);
+    }
+
+    public void enterTournament(){
+        GameObject sceneLoader2 = GameObject.Find("SceneLoader");
+        sceneLoader2.GetComponent<SceneLoader>().FadeToLevel("TournamentShowcaseScene");
     }
 
 

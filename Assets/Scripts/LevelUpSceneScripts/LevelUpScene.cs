@@ -262,6 +262,6 @@ public class LevelUpScene : MonoBehaviour
             Destroy(EnemyGeneratorController.Instance);
         }
         GameObject sceneLoader = GameObject.Find("SceneLoader");
-        sceneLoader.GetComponent<SceneLoader>().FadeToLevel("ShowcaseEnemy");
+        sceneLoader.GetComponent<SceneLoader>().FadeToLevel("TournamentShowcaseScene");
     }
 }

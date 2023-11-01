@@ -10,6 +10,7 @@ public class TournamentManager : MonoBehaviour
     public string currentTournament;
     public List<string> tournaments;
     public bool canEnterCurrentTournament;
+    public int totalEnemysToBeat;
     public int enemysToBeat;
 
     private void Awake()
@@ -66,10 +67,16 @@ public class TournamentManager : MonoBehaviour
 
     public void generateTournament(){
         if (currentTournament.Equals("first")){
-            enemysToBeat = 1;
+            totalEnemysToBeat = 0;
+            enemysToBeat = totalEnemysToBeat;
         }
         else if (currentTournament.Equals("second")){
-            enemysToBeat = 1;
+            totalEnemysToBeat = 0;
+            enemysToBeat = totalEnemysToBeat;
+        }
+        else if (currentTournament.Equals("third")){
+            totalEnemysToBeat = 0;
+            enemysToBeat = totalEnemysToBeat;
         }
         GameObject sceneLoader = GameObject.Find("SceneLoader");
         sceneLoader.GetComponent<SceneLoader>().FadeToLevel("ShowcaseEnemy");

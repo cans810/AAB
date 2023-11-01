@@ -35,7 +35,7 @@ public class SkinChanger : MonoBehaviour
         fillSkinColors();
         entityRace = "Human";
 
-         randomAppereanceInitial();
+        randomAppereanceInitial();
     }
 
     public void randomAppereanceInitial(){

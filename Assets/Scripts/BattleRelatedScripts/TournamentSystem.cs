@@ -6,12 +6,9 @@ using UnityEngine.UI;
 
 public class TournamentSystem : MonoBehaviour
 {
+    public GameObject InBattleRelatedStuff;
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public void nextBattle(){
         if (Player.Instance.gameObject.GetComponent<EntityAttributes>().HP > 0){
             TournamentManager.Instance.enemysToBeat -= 1;
@@ -24,7 +21,7 @@ public class TournamentSystem : MonoBehaviour
                     Destroy(EnemyGeneratorController.Instance);
                 }
                 GameObject sceneLoader = GameObject.Find("SceneLoader");
-                sceneLoader.GetComponent<SceneLoader>().FadeToLevel("ShowcaseEnemy");
+                sceneLoader.GetComponent<SceneLoader>().FadeToLevel("TournamentShowcaseScene");
             }
         }
         else{
@@ -34,7 +31,16 @@ public class TournamentSystem : MonoBehaviour
                 Destroy(EnemyGeneratorController.Instance);
             }
             GameObject sceneLoader = GameObject.Find("SceneLoader");
-            sceneLoader.GetComponent<SceneLoader>().FadeToLevel("ShowcaseEnemy");
+            sceneLoader.GetComponent<SceneLoader>().FadeToLevel("TournamentShowcaseScene");
         }
+    }
+
+    public void continueTournament(){
+        TournamentManager.Instance.enemysToBeat -= 1;
+        if(EnemyGeneratorController.Instance != null){
+             Destroy(EnemyGeneratorController.Instance);
+        }
+        GameObject sceneLoader = GameObject.Find("SceneLoader");
+        sceneLoader.GetComponent<SceneLoader>().FadeToLevel("TournamentShowcaseScene");
     }
 }

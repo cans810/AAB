@@ -36,6 +36,11 @@ public class EnemyCreator : MonoBehaviour
             enemyGenerator.GetComponent<EnemyGeneratorController>().generateFerullus();
             EnemyGeneratorController.Instance.GetComponent<Enemy>().isABoss = true;
         }
+        // Atticus Bloodthirst
+        else if(player.GetComponent<Player>().inATournament && tournamentManager.currentTournament.Equals("third") && !EnemyGeneratorController.SlainAtticusBloodthirst && tournamentManager.enemysToBeat == 0){
+            enemyGenerator.GetComponent<EnemyGeneratorController>().generateAtticusBloodthirst();
+            EnemyGeneratorController.Instance.GetComponent<Enemy>().isABoss = true;
+        }
         else if (!player.GetComponent<Player>().inATournament){
             enemyGenerator.GetComponent<EnemyGeneratorController>().generateRandomEnemy();
             EnemyGeneratorController.Instance.GetComponent<Enemy>().isABoss = false;

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c602fa976c953e4d852e4a2c32f0d28, type: 3}
+  m_Name: Helmet_Boss_03
+  m_EditorClassIdentifier: 
+  itemName: Helmet_Boss_03
+  isWorn: 0
+  texture: {fileID: -8620765128055196570, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
+  level: 0
+  price: 275
+  category: helmet
+  equipped: 0
+  armorPoint: 4
+  pair: {fileID: 0}
+  pairExtra: {fileID: 0}

@@ -15,6 +15,7 @@ public class EnemyGeneratorController : MonoBehaviour
 
     public static bool SlainRomulusTheLeatherman;
     public static bool SlainFerullus;
+    public static bool SlainAtticusBloodthirst;
     
     private void Awake()
     {
@@ -106,6 +107,25 @@ public class EnemyGeneratorController : MonoBehaviour
         STATS_generateSpecificDexterity(2);
         STATS_generateSpecificOffense(9);
         STATS_generateSpecificDefence(6);
+    }
+    public void generateAtticusBloodthirst(){
+        generateBoss(BossesList[2]);
+
+        // APPEREANCE (skin color, race)
+        ChangeSkinColor(generateSpecificSkinColor(110,140,108));
+
+        // STATS
+        HitChance_light = Instance.GetComponent<EntityAttributes>().baseHitChance_light;
+        HitChance_medium = Instance.GetComponent<EntityAttributes>().baseHitChance_medium;
+        HitChance_heavy = Instance.GetComponent<EntityAttributes>().baseHitChance_heavy;
+        HitChance_leap = Instance.GetComponent<EntityAttributes>().baseHitChance_leap;
+
+        STATS_generateSpecificStrength(22);
+        STATS_generateSpecificVitality(12);
+        STATS_generateSpecificStamina(8);
+        STATS_generateSpecificDexterity(3);
+        STATS_generateSpecificOffense(13);
+        STATS_generateSpecificDefence(4);
     }
 
     public void generateBoss(GameObject bossPrefab){

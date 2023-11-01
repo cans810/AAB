@@ -24,6 +24,7 @@ public class BossShowcase : MonoBehaviour
 
     private GameObject enemy;
     public GameObject statsShowcase;
+    public GameObject bossBackStoryText;
 
     public void Start(){
         GameObject player = GameObject.Find("Player");
@@ -32,8 +33,23 @@ public class BossShowcase : MonoBehaviour
 
         enemy = EnemyGeneratorController.Instance;
         enemy.GetComponent<EnemyActionsManager>().side = "left";
-        if (enemy.name.Equals("RomulusTheLeatherman(Clone)")) enemy.GetComponent<Enemy>().animator.SetTrigger("RomulusTheLeathermanShowcase");
-        if (enemy.name.Equals("Ferullus(Clone)")) enemy.GetComponent<Enemy>().animator.SetTrigger("FerullusShowcase");
+        
+        if (enemy.name.Equals("Romulus The Leatherman(Clone)")){
+            enemy.GetComponent<Enemy>().animator.SetTrigger("RomulusTheLeathermanShowcase");
+            bossBackStoryText.GetComponent<TextMeshProUGUI>().text = BossBackStoryManager.RomulusTheLeathermanBackStory;
+        }
+    
+        if (enemy.name.Equals("Ferullus(Clone)")){ 
+            enemy.GetComponent<Enemy>().animator.SetTrigger("FerullusShowcase");
+            bossBackStoryText.GetComponent<TextMeshProUGUI>().text = BossBackStoryManager.FerullusBackStory;
+        }
+
+        if (enemy.name.Equals("Atticus Bloodthirst(Clone)")){ 
+            enemy.GetComponent<Enemy>().animator.SetTrigger("FerullusShowcase");
+            bossBackStoryText.GetComponent<TextMeshProUGUI>().text = BossBackStoryManager.AtticusBloodthirstBackStory;
+        }
+
+        
         
 
         enemy.GetComponent<EntityAttributes>().updatePowerValue();

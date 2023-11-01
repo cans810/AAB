@@ -308,4 +308,13 @@ public class CreateNewCharacter : MonoBehaviour
         GameObject sceneLoader = GameObject.Find("SceneLoader");
         sceneLoader.GetComponent<SceneLoader>().FadeToLevel("ShowcaseEnemy");
     }
+
+    public void enterPrologueCutscene(){
+        updatePlayerValues();
+        GameObject backgroundMusicManager = GameObject.Find("Background Music");
+        backgroundMusicManager.GetComponent<BackgroundMusicManager>().StartFadeOut();
+        
+        GameObject sceneLoader = GameObject.Find("SceneLoader");
+        sceneLoader.GetComponent<SceneLoader>().FadeToLevel("CutscenesScene");
+    }
 }

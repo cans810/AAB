@@ -131,18 +131,19 @@ public class BattleSystem : MonoBehaviour
                 }
 
                 // !enemy.GetComponent<EnemyActionsManager>().inAction çok önemli
-                if (enemy.GetComponent<EnemyActionsManager>().played && (!enemy.GetComponent<EnemyActionsManager>().inAction && !enemy.GetComponent<EnemyActionsManager>().inReactionAction))
+                if (enemy.GetComponent<EnemyActionsManager>().played && (!enemy.GetComponent<EnemyActionsManager>().inAction || !enemy.GetComponent<EnemyActionsManager>().inReactionAction))
                 {
                     if (!waitingInBetweenTurns)
                     {
                         waitingInBetweenTurns = true;
                         //StartCoroutine(WaitAndTransition(0f, BattleState.PLAYERTURN));
-                        
-                        state = BattleState.PLAYERTURN;
+            
+                        StartCoroutine(WaitAndChangeTurn(0.1f));
+
                         enemy.GetComponent<EnemyActionsManager>().inAction = false;
                         enemy.GetComponent<EnemyActionsManager>().inReactionAction = false;
                         enemy.GetComponent<EnemyActionsManager>().played = false;
-                        StartCoroutine(WaitAndChangeTurn(0.1f));
+                        state = BattleState.PLAYERTURN;
                     }
                 }
             }
@@ -167,11 +168,12 @@ public class BattleSystem : MonoBehaviour
                         waitingInBetweenTurns = true;
                         //StartCoroutine(WaitAndTransition(0f, BattleState.ENEMYTURN));
                         
-                        state = BattleState.ENEMYTURN;
+                        StartCoroutine(WaitAndChangeTurn(0.1f));
+
                         player.GetComponent<ActionsManager>().inAction = false;
                         player.GetComponent<ActionsManager>().inReactionAction = false;
                         player.GetComponent<ActionsManager>().played = false;
-                        StartCoroutine(WaitAndChangeTurn(0.1f));
+                        state = BattleState.ENEMYTURN;
                     }
                 }
             }
@@ -203,7 +205,7 @@ public class BattleSystem : MonoBehaviour
 
     public void editTournamentInfoNApplySlayedBoss(){
 
-        if (enemy.name.Equals("RomulusTheLeatherman(Clone)")){
+        if (enemy.name.Equals("Romulus The Leatherman(Clone)")){
             player.GetComponent<Player>().inATournament = false;
             TournamentManager.Instance.currentTournament = TournamentManager.Instance.tournaments[1];
             TournamentManager.Instance.canEnterCurrentTournament = false;
@@ -215,7 +217,12 @@ public class BattleSystem : MonoBehaviour
             TournamentManager.Instance.canEnterCurrentTournament = false;
             EnemyGeneratorController.SlainFerullus = true;
         }
-
+        else if (enemy.name.Equals("Atticus Bloodthirst(Clone)")){
+            player.GetComponent<Player>().inATournament = false;
+            TournamentManager.Instance.currentTournament = TournamentManager.Instance.tournaments[3];
+            TournamentManager.Instance.canEnterCurrentTournament = false;
+            EnemyGeneratorController.SlainAtticusBloodthirst = true;
+        }
     }
 
     private IEnumerator WaitAndTransition(float waitTime, BattleState nextState)

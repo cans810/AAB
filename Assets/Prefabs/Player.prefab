@@ -2746,8 +2746,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f838e1e5c18047d42b73f695e78cc50b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eyeObject: {fileID: 4693743469282270930}
+  mouthObject: {fileID: 4046197290628666098}
   eyes_state: 
   mouth_state: 
+  eyeSprite: {fileID: 0}
+  mouthSprite: {fileID: 0}
 --- !u!114 &5567488821087015811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2786,6 +2790,8 @@ MonoBehaviour:
   race: 
   hair: 
   facial_hair: 
+  hairObject: {fileID: 0}
+  facialHairObject: {fileID: 0}
 --- !u!114 &7599520804821938297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2809,16 +2815,27 @@ MonoBehaviour:
   attackingMedium: 0
   attackingHeavy: 0
   attackingLeaping: 0
+  blockingMelee: 0
   surrendering: 0
   dying: 0
   intimidating: 0
+  movingNextToEnemyToSacrifice: 0
+  sacrificialAttack: 0
+  sparing: 0
+  endBattle: 0
   inAction: 0
+  inReactionAction: 0
   played: 0
   canAttack_Melee: 0
   canAttack_Leaping: 0
   side: 
   currentAnimationUndone: 0
   KBPower: 0
+  walkOnSand_soundEffect: {fileID: 0}
+  gotHit_soundEffects: []
+  punch_soundEffects: []
+  punchMiss_soundEffects: []
+  amountGotHit: 0
 --- !u!114 &7599520804821938296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2833,6 +2850,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   xp: 0
+  PowerValue: 0
   strength: 0
   stamina: 0
   dexterity: 0
@@ -2845,12 +2863,21 @@ MonoBehaviour:
   heightInCm: 170
   baseHitDamage: 2
   hitDamage: 0
-  heightChange: 0
+  baseHitChance_light: 0
+  baseHitChance_medium: 0
+  baseHitChance_heavy: 0
+  baseHitChance_leap: 0
+  hitChance_light: 0
+  hitChance_medium: 0
+  hitChance_heavy: 0
+  hitChance_leap: 0
   destinationX: 0
   moveSpeed: 0
   energy: 0
   maxHP: 0
   HP: 0
+  maxSP: 0
+  SP: 0
   maxArmorPoint: 0
   armorPoint: 0
   baseStepSize: 0
@@ -2872,6 +2899,8 @@ MonoBehaviour:
   hitbox: {fileID: 3660655331643841797}
   originalScale: {x: 0.33, y: 0.33, z: 0.33}
   showcaseScale: {x: 0.5, y: 0.5, z: 0.5}
+  goldBalance: 0
+  inATournament: 0
 --- !u!114 &4882059618095999974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4163,13 +4192,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 17
+  m_SortingOrder: 200
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.53, y: 0.25}
+  m_Size: {x: 1.6, y: 0.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -4188,8 +4217,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CategoryHash: 2.2584623e-12
-  m_labelHash: 3.991422e-13
-  m_SpriteKey: 0.00000009513003
+  m_labelHash: 1.1250247
+  m_SpriteKey: 3.83668e-23
 --- !u!114 &1878902026244297481
 MonoBehaviour:
   m_ObjectHideFlags: 0

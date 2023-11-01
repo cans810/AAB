@@ -14,10 +14,10 @@ public class AppereanceManager : MonoBehaviour
     public GameObject facialHairObject;
 
     void Awake(){
-        race = "Human";
+        //race = "Human";
 
-        hair = "none";
-        facial_hair = "none";
+        //hair = "none";
+        //facial_hair = "none";
     }
 
     void Update(){
