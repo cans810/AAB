@@ -104,7 +104,6 @@ public class Enemy : Entity
         gameObject.GetComponent<EnemyActionsManager>().intimidating = false;
         gameObject.GetComponent<EnemyActionsManager>().inAction = false;
         gameObject.GetComponent<EnemyActionsManager>().canAttack_Melee = false;
-        gameObject.GetComponent<EnemyActionsManager>().canAttack_Leaping = false;
         gameObject.GetComponent<EnemyActionsManager>().stopSurrender();
         gameObject.GetComponent<EnemyActionsManager>().stopDeath();
 
@@ -274,6 +273,12 @@ public class Enemy : Entity
             animator.SetBool("Walking",false);
             animator.SetBool("Idle",true);
         }
+
+        if (IsAttackingAnyKind()){
+            if (gameObject.GetComponent<EnemyActionsManager>().canAttack_Melee && gameObject.GetComponent<EnemyActionsManager>().doDamageEnemy){
+                gameObject.GetComponent<EnemyActionsManager>().DamageEnemy();
+            }
+        }
     }
 
     public void flipAccordingToSide(){
@@ -286,6 +291,14 @@ public class Enemy : Entity
             transform.rotation = desiredRotation;
         }
     }
+
+    public bool IsAttackingAnyKind(){
+        return gameObject.GetComponent<EnemyActionsManager>().attackingLight ||
+            gameObject.GetComponent<EnemyActionsManager>().attackingMedium ||
+            gameObject.GetComponent<EnemyActionsManager>().attackingHeavy ||
+            gameObject.GetComponent<EnemyActionsManager>().attackingLeaping;
+    }
+
 
     private bool IsAnimationPlaying(string animationName)
     {

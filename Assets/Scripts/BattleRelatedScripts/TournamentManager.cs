@@ -78,6 +78,10 @@ public class TournamentManager : MonoBehaviour
             totalEnemysToBeat = 0;
             enemysToBeat = totalEnemysToBeat;
         }
+        else if (currentTournament.Equals("fourth")){
+            totalEnemysToBeat = 0;
+            enemysToBeat = totalEnemysToBeat;
+        }
         GameObject sceneLoader = GameObject.Find("SceneLoader");
         sceneLoader.GetComponent<SceneLoader>().FadeToLevel("ShowcaseEnemy");
     }

@@ -48,8 +48,7 @@ public class BossShowcase : MonoBehaviour
             enemy.GetComponent<Enemy>().animator.SetTrigger("FerullusShowcase");
             bossBackStoryText.GetComponent<TextMeshProUGUI>().text = BossBackStoryManager.AtticusBloodthirstBackStory;
         }
-
-        
+    
         
 
         enemy.GetComponent<EntityAttributes>().updatePowerValue();

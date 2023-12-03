@@ -248,7 +248,7 @@ public class LevelUpScene : MonoBehaviour
     }
     
     public void goToTown(){
-        if (Player.Instance.inATournament){
+        if (Player.Instance.inTournament){
             continueToTournament();
         }
         else{

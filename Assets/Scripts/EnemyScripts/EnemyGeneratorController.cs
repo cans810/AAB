@@ -10,12 +10,12 @@ public class EnemyGeneratorController : MonoBehaviour
     public Color randomSkinColorGenerated;
     public SpriteLibraryAsset[] skins;
     private List<string> races = new List<string>();
-
+    public List<GameObject> NPCsList;
     public List<GameObject> BossesList;
-
     public static bool SlainRomulusTheLeatherman;
     public static bool SlainFerullus;
     public static bool SlainAtticusBloodthirst;
+    public static bool SlainTheMammoth;
     
     private void Awake()
     {
@@ -67,6 +67,30 @@ public class EnemyGeneratorController : MonoBehaviour
         }
 
         DontDestroyOnLoad(Instance);
+    }
+
+    public void generateUnluckyFolk(){
+        // to remove the existing enemy completely
+        if(Instance != null){
+            Destroy(Instance);
+        }
+
+        Instance = Instantiate(NPCsList[0]);
+
+        DontDestroyOnLoad(Instance);
+
+        // STATS
+        HitChance_light = Instance.GetComponent<EntityAttributes>().baseHitChance_light;
+        HitChance_medium = Instance.GetComponent<EntityAttributes>().baseHitChance_medium;
+        HitChance_heavy = Instance.GetComponent<EntityAttributes>().baseHitChance_heavy;
+        HitChance_leap = Instance.GetComponent<EntityAttributes>().baseHitChance_leap;
+
+        STATS_generateSpecificStrength(1);
+        STATS_generateSpecificVitality(1);
+        STATS_generateSpecificStamina(1);
+        STATS_generateSpecificDexterity(1);
+        STATS_generateSpecificOffense(1);
+        STATS_generateSpecificDefence(1);
     }
 
     public void generateRomulusTheLeatherman(){
@@ -126,6 +150,23 @@ public class EnemyGeneratorController : MonoBehaviour
         STATS_generateSpecificDexterity(3);
         STATS_generateSpecificOffense(13);
         STATS_generateSpecificDefence(4);
+    }
+
+    public void generateTheMammoth(){
+        generateBoss(BossesList[3]);
+
+        // STATS
+        HitChance_light = Instance.GetComponent<EntityAttributes>().baseHitChance_light;
+        HitChance_medium = Instance.GetComponent<EntityAttributes>().baseHitChance_medium;
+        HitChance_heavy = Instance.GetComponent<EntityAttributes>().baseHitChance_heavy;
+        HitChance_leap = Instance.GetComponent<EntityAttributes>().baseHitChance_leap;
+
+        STATS_generateSpecificStrength(45);
+        STATS_generateSpecificVitality(12);
+        STATS_generateSpecificStamina(4);
+        STATS_generateSpecificDexterity(4);
+        STATS_generateSpecificOffense(8);
+        STATS_generateSpecificDefence(8);
     }
 
     public void generateBoss(GameObject bossPrefab){

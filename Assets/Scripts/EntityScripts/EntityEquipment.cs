@@ -33,4 +33,8 @@ public class EntityEquipment : MonoBehaviour
         equippedItemsInventory.Add(CalfWorn);
         equippedItemsInventory.Add(FootWorn);
     }
+
+    public bool IsWearingEnoughToMakeMetalsHittingSound(){
+        return RightHandEquipped != null || LeftHandEquipped != null || HelmetWorn != null || ChestplateWorn != null || ArmWorn != null || ForearmWorn != null;
+    }
 }

@@ -18,7 +18,6 @@ public class Player : Entity
     public static Player Instance { get; private set; }
 
     public int goldBalance;
-    public bool inATournament;
     
     private void Awake()
     {
@@ -107,7 +106,6 @@ public class Player : Entity
         gameObject.GetComponent<ActionsManager>().dying = false;
         gameObject.GetComponent<ActionsManager>().intimidating = false;
         gameObject.GetComponent<ActionsManager>().canAttack_Melee = false;
-        gameObject.GetComponent<ActionsManager>().canAttack_Leaping = false;
 
         gameObject.GetComponent<EntityAttributes>().calculateMaxArmorPoint();
         gameObject.GetComponent<EntityAttributes>().updatePowerValue();
@@ -119,14 +117,8 @@ public class Player : Entity
 
     // Update is called once per frame
     void Update(){
-        //Debug.Log(maxArmorPoint);
-
-        //Debug.Log(Player.Instance.transform.localPosition.x + ", " + Player.Instance.transform.localPosition.y);
 
         flipAccordingToSide();
-
-        //Debug.Log(gameObject.GetComponent<ActionsManager>().side);
-
 
         if (gameObject.GetComponent<ActionsManager>().movingRight){
             if (rb.position.x <= gameObject.GetComponent<EntityAttributes>().destinationX){
@@ -271,6 +263,12 @@ public class Player : Entity
             animator.SetBool("Walking",false);
             animator.SetBool("Idle",true);
         }
+
+        if (IsAttackingAnyKind()){
+            if (gameObject.GetComponent<ActionsManager>().canAttack_Melee && gameObject.GetComponent<ActionsManager>().doDamageEnemy){
+                gameObject.GetComponent<ActionsManager>().DamageEnemy();
+            }
+        }
     }
 
     public void flipAccordingToSide(){
@@ -282,6 +280,13 @@ public class Player : Entity
             Quaternion desiredRotation = Quaternion.Euler(0f, 0, 0f);
             transform.rotation = desiredRotation;
         }
+    }
+
+    public bool IsAttackingAnyKind(){
+        return gameObject.GetComponent<ActionsManager>().attackingLight ||
+               gameObject.GetComponent<ActionsManager>().attackingMedium ||
+               gameObject.GetComponent<ActionsManager>().attackingHeavy ||
+               gameObject.GetComponent<ActionsManager>().attackingLeaping;
     }
 
     private bool IsAnimationPlaying(string animationName)

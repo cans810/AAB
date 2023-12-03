@@ -28,21 +28,13 @@ public class EnemyActionsManager : MonoBehaviour
     public bool inReactionAction;
     public bool played;
     public bool canAttack_Melee;
-    public bool canAttack_Leaping;
+    public bool doDamageEnemy;
     public string side;
     public bool currentAnimationUndone;
     public double KBPower;
-
-    public AudioSource walkOnSand_soundEffect;
-
-    public AudioSource[] gotHit_soundEffects;
-
-    public AudioSource[] punch_soundEffects;
-
-    public AudioSource[] punchMiss_soundEffects;
-
     public float amountGotHit;
 
+    public GameObject soundsManager;
 
     void Awake(){
         side = "right";
@@ -85,16 +77,16 @@ public class EnemyActionsManager : MonoBehaviour
     }
 
     public void attackLight(){
-        if (gameObject.GetComponent<EntityEquipment>().RightHandEquipped == null && canAttack_Melee){
-            int randomPunchSoundEffect = UnityEngine.Random.Range(0, punch_soundEffects.Length);
+        // if (canAttack_Melee){
+        //     int randomPunchSoundEffect = UnityEngine.Random.Range(0, soundsManager.GetComponent<EntitySoundsManager>().punch_soundEffects.Length);
 
-            punch_soundEffects[randomPunchSoundEffect].Play();
-        }
-        else if(!canAttack_Melee){
-            int randomPunchMissSoundEffect = UnityEngine.Random.Range(0, punchMiss_soundEffects.Length);
+        //     soundsManager.GetComponent<EntitySoundsManager>().punch_soundEffects[randomPunchSoundEffect].Play();
+        // }
+        // else if(!canAttack_Melee){
+        //     int randomPunchMissSoundEffect = UnityEngine.Random.Range(0, soundsManager.GetComponent<EntitySoundsManager>().punchMiss_soundEffects.Length);
 
-            punchMiss_soundEffects[randomPunchMissSoundEffect].Play();
-        }
+        //     soundsManager.GetComponent<EntitySoundsManager>().punchMiss_soundEffects[randomPunchMissSoundEffect].Play();
+        // }
 
         idle = false;
         inAction = true;
@@ -114,16 +106,16 @@ public class EnemyActionsManager : MonoBehaviour
     }
 
     public void attackMedium(){
-        if (gameObject.GetComponent<EntityEquipment>().RightHandEquipped == null && canAttack_Melee){
-            int randomPunchSoundEffect = UnityEngine.Random.Range(0, punch_soundEffects.Length);
+        // if (canAttack_Melee){
+        //     int randomPunchSoundEffect = UnityEngine.Random.Range(0, soundsManager.GetComponent<EntitySoundsManager>().punch_soundEffects.Length);
 
-            punch_soundEffects[randomPunchSoundEffect].Play();
-        }
-        else if(!canAttack_Melee){
-            int randomPunchMissSoundEffect = UnityEngine.Random.Range(0, punchMiss_soundEffects.Length);
+        //     soundsManager.GetComponent<EntitySoundsManager>().punch_soundEffects[randomPunchSoundEffect].Play();
+        // }
+        // else if(!canAttack_Melee){
+        //     int randomPunchMissSoundEffect = UnityEngine.Random.Range(0, soundsManager.GetComponent<EntitySoundsManager>().punchMiss_soundEffects.Length);
 
-            punchMiss_soundEffects[randomPunchMissSoundEffect].Play();
-        }
+        //     soundsManager.GetComponent<EntitySoundsManager>().punchMiss_soundEffects[randomPunchMissSoundEffect].Play();
+        // }
 
         idle = false;
         inAction = true;
@@ -143,16 +135,16 @@ public class EnemyActionsManager : MonoBehaviour
     }
 
     public void attackHeavy(){
-        if (gameObject.GetComponent<EntityEquipment>().RightHandEquipped == null && canAttack_Melee){
-            int randomPunchSoundEffect = UnityEngine.Random.Range(0, punch_soundEffects.Length);
+        // if (canAttack_Melee){
+        //     int randomPunchSoundEffect = UnityEngine.Random.Range(0, soundsManager.GetComponent<EntitySoundsManager>().punch_soundEffects.Length);
 
-            punch_soundEffects[randomPunchSoundEffect].Play();
-        }
-        else if(!canAttack_Melee){
-            int randomPunchMissSoundEffect = UnityEngine.Random.Range(0, punchMiss_soundEffects.Length);
+        //     soundsManager.GetComponent<EntitySoundsManager>().punch_soundEffects[randomPunchSoundEffect].Play();
+        // }
+        // else if(!canAttack_Melee){
+        //     int randomPunchMissSoundEffect = UnityEngine.Random.Range(0, soundsManager.GetComponent<EntitySoundsManager>().punchMiss_soundEffects.Length);
 
-            punchMiss_soundEffects[randomPunchMissSoundEffect].Play();
-        }
+        //     soundsManager.GetComponent<EntitySoundsManager>().punchMiss_soundEffects[randomPunchMissSoundEffect].Play();
+        // }
 
         idle = false;
         inAction = true;
@@ -173,37 +165,29 @@ public class EnemyActionsManager : MonoBehaviour
 
     public void attackLeaping(){
         idle = false;
-        if (!canLeapHitEnemy()){
-            inAction = true;
-            attackingLeaping = true;
-            gameObject.GetComponent<Enemy>().animator.SetBool("Walking",false);
-            gameObject.GetComponent<Enemy>().animator.SetBool("Idle",false);
-            gameObject.GetComponent<Enemy>().animator.SetTrigger("Leap_Attack");
-        }
-        else if (canLeapHitEnemy()){
-            inAction = true;
-            attackingLeaping = true;
-            gameObject.GetComponent<Enemy>().animator.SetBool("Walking",false);
-            gameObject.GetComponent<Enemy>().animator.SetBool("Idle",false);
-            gameObject.GetComponent<Enemy>().animator.SetTrigger("Leap_Attack_Hit");
-        }
-
+        
+        inAction = true;
+        attackingLeaping = true;
+        gameObject.GetComponent<Enemy>().animator.SetBool("Walking",false);
+        gameObject.GetComponent<Enemy>().animator.SetBool("Idle",false);
+        gameObject.GetComponent<Enemy>().animator.SetTrigger("Leap_Attack_Hit");
+        
         adjustLeapAttackAnimations();
     }
 
-    public void playAtLeapAttackMissEnd(){
-        int randomPunchSoundEffect = UnityEngine.Random.Range(0, punchMiss_soundEffects.Length);
+    // public void playAtLeapAttackMissEnd(){
+    //     int randomPunchSoundEffect = UnityEngine.Random.Range(0, soundsManager.GetComponent<EntitySoundsManager>().punchMiss_soundEffects.Length);
 
-        punchMiss_soundEffects[randomPunchSoundEffect].Play();
-    }
+    //     soundsManager.GetComponent<EntitySoundsManager>().punchMiss_soundEffects[randomPunchSoundEffect].Play();
+    // }
 
-    public void playAtLeapAttackHitEnd(){
-        if (gameObject.GetComponent<EntityEquipment>().RightHandEquipped == null){
-            int randomPunchSoundEffect = UnityEngine.Random.Range(0, punch_soundEffects.Length);
+    // public void playAtLeapAttackHitEnd(){
+        
+    //     int randomPunchSoundEffect = UnityEngine.Random.Range(0, soundsManager.GetComponent<EntitySoundsManager>().punch_soundEffects.Length);
 
-            punch_soundEffects[randomPunchSoundEffect].Play();
-        }
-    }
+    //     soundsManager.GetComponent<EntitySoundsManager>().punch_soundEffects[randomPunchSoundEffect].Play();
+        
+    // }
 
     public void adjustMoveSpeed(){
         float animationDuration = 0.34f;
@@ -218,28 +202,15 @@ public class EnemyActionsManager : MonoBehaviour
 
         float distance = 0;
 
-        if (!canLeapHitEnemy()){
-            if (side.Equals("left")){
-                gameObject.GetComponent<EntityAttributes>().destinationX = gameObject.GetComponent<Rigidbody2D>().position.x + gameObject.GetComponent<EntityAttributes>().stepSize*3/4f;
-            }
-            else if (side.Equals("right")){
-                gameObject.GetComponent<EntityAttributes>().destinationX = gameObject.GetComponent<Rigidbody2D>().position.x - gameObject.GetComponent<EntityAttributes>().stepSize*3/4f;
-            }
-
-            distance = Math.Abs(gameObject.GetComponent<EntityAttributes>().destinationX - gameObject.GetComponent<Rigidbody2D>().position.x);
-
+        if (side.Equals("left")){
+            gameObject.GetComponent<EntityAttributes>().destinationX = gameObject.GetComponent<Rigidbody2D>().position.x + gameObject.GetComponent<EntityAttributes>().stepSize*3/4f;
         }
-        else if (canLeapHitEnemy()){
-            if (side.Equals("left")){
-                gameObject.GetComponent<EntityAttributes>().destinationX = enemy.GetComponent<Rigidbody2D>().position.x - enemy.GetComponent<BoxCollider2D>().size.x*4/10;
-            }
-            else if (side.Equals("right")){
-                gameObject.GetComponent<EntityAttributes>().destinationX = enemy.GetComponent<Rigidbody2D>().position.x + enemy.GetComponent<BoxCollider2D>().size.x*4/10;
-            }
-
-            distance = Math.Abs(gameObject.GetComponent<EntityAttributes>().destinationX - gameObject.GetComponent<Rigidbody2D>().position.x);
+        else if (side.Equals("right")){
+            gameObject.GetComponent<EntityAttributes>().destinationX = gameObject.GetComponent<Rigidbody2D>().position.x - gameObject.GetComponent<EntityAttributes>().stepSize*3/4f;
         }
 
+        distance = Math.Abs(gameObject.GetComponent<EntityAttributes>().destinationX - gameObject.GetComponent<Rigidbody2D>().position.x);
+        
         float moveSpeed = distance * 1.8f;
         
         // Apply the calculated moveSpeed
@@ -252,6 +223,10 @@ public class EnemyActionsManager : MonoBehaviour
         gameObject.GetComponent<Enemy>().animator.SetBool("Walking",false);
         gameObject.GetComponent<Enemy>().animator.SetBool("Idle",false);
         gameObject.GetComponent<Enemy>().animator.SetTrigger("Surrender");
+
+        int randomSound = UnityEngine.Random.Range(0,soundsManager.GetComponent<EntitySoundsManager>().deathSoundEffects.Length);
+        soundsManager.GetComponent<EntitySoundsManager>().playDeathSoundEffects(randomSound);
+
         changeMouth("mouthFrown");
         changeEyes("eyesSerious");
     }
@@ -261,6 +236,9 @@ public class EnemyActionsManager : MonoBehaviour
         dying = true;
         gameObject.GetComponent<Enemy>().animator.SetBool("Walking",false);
         gameObject.GetComponent<Enemy>().animator.SetBool("Idle",false);
+
+        int randomSound = UnityEngine.Random.Range(0,soundsManager.GetComponent<EntitySoundsManager>().deathSoundEffects.Length);
+        soundsManager.GetComponent<EntitySoundsManager>().playDeathSoundEffects(randomSound);
 
         int randomAnimation = UnityEngine.Random.Range(1, 3); // The upper bound is exclusive, so use 3 to include 2
 
@@ -328,40 +306,6 @@ public class EnemyActionsManager : MonoBehaviour
         inAction = false;
     }
 
-    public bool canLeapHitEnemy(){
-        GameObject enemy = GameObject.FindWithTag("Player");
-        
-        if (side.Equals("left")){
-            if (gameObject.GetComponent<Enemy>().hitbox.GetComponent<BoxCollider2D>().bounds.max.x + gameObject.GetComponent<EntityAttributes>().stepSize*3/4f >= 
-            enemy.GetComponent<BoxCollider2D>().bounds.min.x){
-
-            Debug.Log("can hit " + (gameObject.GetComponent<Enemy>().hitbox.GetComponent<BoxCollider2D>().bounds.max.x + gameObject.GetComponent<EntityAttributes>().stepSize*3/4f) + " is bigger than " + 
-            enemy.GetComponent<BoxCollider2D>().bounds.min.x);
-
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
-        else if (side.Equals("right")){
-            if (gameObject.GetComponent<Enemy>().hitbox.GetComponent<BoxCollider2D>().bounds.min.x - gameObject.GetComponent<EntityAttributes>().stepSize*3/4f <= 
-            enemy.GetComponent<BoxCollider2D>().bounds.max.x){
-
-                Debug.Log("can hit " + (gameObject.GetComponent<Enemy>().hitbox.GetComponent<BoxCollider2D>().bounds.min.x - gameObject.GetComponent<EntityAttributes>().stepSize*3/4f) + " is smaller than " + 
-                enemy.GetComponent<BoxCollider2D>().bounds.max.x);
-
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
-        else{
-            return false;
-        }
-    }
-
     public void intimidate(){
         gameObject.GetComponent<Enemy>().animator.SetBool("Idle",false);
         gameObject.GetComponent<Enemy>().animator.SetTrigger("Intimidate");
@@ -388,7 +332,7 @@ public class EnemyActionsManager : MonoBehaviour
     }
 
     public void moveRight(){
-        walkOnSand_soundEffect.Play();
+        soundsManager.GetComponent<EntitySoundsManager>().playWalkingOnSandSoundEffect();
 
         gameObject.GetComponent<Enemy>().animator.SetBool("Idle",false);
         gameObject.GetComponent<Enemy>().animator.SetBool("Walking",true);
@@ -410,7 +354,7 @@ public class EnemyActionsManager : MonoBehaviour
     }
 
     public void moveLeft(){
-        walkOnSand_soundEffect.Play();
+        soundsManager.GetComponent<EntitySoundsManager>().playWalkingOnSandSoundEffect();
 
         gameObject.GetComponent<Enemy>().animator.SetBool("Idle",false);
         gameObject.GetComponent<Enemy>().animator.SetBool("Walking",true);
@@ -453,13 +397,6 @@ public class EnemyActionsManager : MonoBehaviour
         played = true;
         inAction = false;
         attackingLeaping = false;
-
-        if (canAttack_Melee){
-            GameObject enemy = GameObject.FindWithTag("Player");
-            calculateHitChance("melee_leap",GetComponent<EntityAttributes>().baseHitChance_leap);
-            enemy.GetComponent<ActionsManager>().getHit(GetComponent<EntityAttributes>().hitDamage,generateHitChance(calculateHitChance("melee_leap",GetComponent<EntityAttributes>().baseHitChance_leap)));
-            Debug.Log("hit");
-        }
     }
 
     public void DamageEnemy(){
@@ -475,7 +412,12 @@ public class EnemyActionsManager : MonoBehaviour
             else if (attackingHeavy){
                 enemy.GetComponent<ActionsManager>().getHit(GetComponent<EntityAttributes>().hitDamage*2f,generateHitChance(calculateHitChance("melee_heavy",GetComponent<EntityAttributes>().baseHitChance_heavy)));
             }
+            else if (attackingLeaping){
+                enemy.GetComponent<ActionsManager>().getHit(GetComponent<EntityAttributes>().hitDamage,generateHitChance(calculateHitChance("melee_leap",GetComponent<EntityAttributes>().baseHitChance_leap)));
+            }
         }
+
+        doDamageEnemy = false;
     }
 
     public float calculateHitChance(string hitType, float baseHitChance){
@@ -557,6 +499,8 @@ public class EnemyActionsManager : MonoBehaviour
         Debug.Log("chance to hit enemy: " + randomChance);
 
         if (randomChance <= hitChance*100f){
+            int randomSound = UnityEngine.Random.Range(0,soundsManager.GetComponent<EntitySoundsManager>().punchSoundEffects.Length);
+            soundsManager.GetComponent<EntitySoundsManager>().playPunchSoundEffects(randomSound);
             return true;
         }
         else{
@@ -572,6 +516,9 @@ public class EnemyActionsManager : MonoBehaviour
                 idle = false;
                 inReactionAction = true;
                 gotHit = true;
+
+                int randomSound = UnityEngine.Random.Range(0,soundsManager.GetComponent<EntitySoundsManager>().hurtSoundEffects.Length);
+                soundsManager.GetComponent<EntitySoundsManager>().playHurtSoundEffects(randomSound);
 
                 float before = gameObject.GetComponent<EntityAttributes>().armorPoint;
                 gameObject.GetComponent<EntityAttributes>().armorPoint -= (int)damageValue;
@@ -599,6 +546,7 @@ public class EnemyActionsManager : MonoBehaviour
                 GameObject enemy = GameObject.FindWithTag("Player");
                 Vector2 direction = (transform.position - enemy.transform.position).normalized;
                 gameObject.GetComponent<Rigidbody2D>().AddForce(direction*(float)(enemy.GetComponent<ActionsManager>().KBPower),ForceMode2D.Impulse);
+                
             }
 
             else{
@@ -606,19 +554,23 @@ public class EnemyActionsManager : MonoBehaviour
                 inReactionAction = true;
                 gotHit = true;
 
-                int randomGotHitSoundEffect = UnityEngine.Random.Range(0, gotHit_soundEffects.Length);
-
-                gotHit_soundEffects[randomGotHitSoundEffect].Play();
-
                 float before = gameObject.GetComponent<EntityAttributes>().HP;
                 gameObject.GetComponent<EntityAttributes>().HP -= damageValue;
 
                 amountGotHit = before-gameObject.GetComponent<EntityAttributes>().HP;
 
                 if (gameObject.GetComponent<EntityAttributes>().HP <= 0){
-                    surrender();
+                    if (GetComponent<Enemy>().inTournament){
+                        death();
+                    }
+                    else if (!GetComponent<Enemy>().inTournament){
+                        surrender();
+                    }
                 }
                 else{
+                    int randomSound = UnityEngine.Random.Range(0,soundsManager.GetComponent<EntitySoundsManager>().hurtSoundEffects.Length);
+                    soundsManager.GetComponent<EntitySoundsManager>().playHurtSoundEffects(randomSound);
+
                     int randomAnimation = UnityEngine.Random.Range(1, 3); // The upper bound is exclusive, so use 3 to include 2
 
                     if (randomAnimation == 1){
@@ -646,6 +598,12 @@ public class EnemyActionsManager : MonoBehaviour
             idle = false;
             inReactionAction = true;
             blockingMelee = true;
+
+            if (gameObject.GetComponent<EntityEquipment>().IsWearingEnoughToMakeMetalsHittingSound()){
+                int randomSound = UnityEngine.Random.Range(0,soundsManager.GetComponent<EntitySoundsManager>().weaponsHittingSoundEffects.Length);
+                soundsManager.GetComponent<EntitySoundsManager>().playWeaponsHittingSoundEffects(randomSound);
+            }
+
             gameObject.GetComponent<Enemy>().animator.SetTrigger("Block_1");
         }
     }
@@ -748,7 +706,7 @@ public class EnemyActionsManager : MonoBehaviour
         GameObject enemy = GameObject.FindWithTag("Player");
 
         if (side.Equals("left")){
-            walkOnSand_soundEffect.Play();
+            soundsManager.GetComponent<EntitySoundsManager>().playWalkingOnSandSoundEffect();
 
             gameObject.GetComponent<Enemy>().animator.SetBool("Idle",false);
             gameObject.GetComponent<Enemy>().animator.SetBool("Walking",true);
@@ -760,7 +718,7 @@ public class EnemyActionsManager : MonoBehaviour
             gameObject.GetComponent<EntityAttributes>().moveSpeed = 3.6f;
         }
         else if (side.Equals("right")){
-            walkOnSand_soundEffect.Play();
+            soundsManager.GetComponent<EntitySoundsManager>().playWalkingOnSandSoundEffect();
 
             gameObject.GetComponent<Enemy>().animator.SetBool("Idle",false);
             gameObject.GetComponent<Enemy>().animator.SetBool("Walking",true);

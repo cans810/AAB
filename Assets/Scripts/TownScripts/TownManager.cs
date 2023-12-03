@@ -98,19 +98,21 @@ public class TownManager : MonoBehaviour
     public void enterTournament(){
         GameObject sceneLoader2 = GameObject.Find("SceneLoader");
         sceneLoader2.GetComponent<SceneLoader>().FadeToLevel("TournamentShowcaseScene");
+        playerObject.GetComponent<Player>().inTournament = true;
     }
 
 
     public void enterBattle(){
         GameObject sceneLoader = GameObject.Find("SceneLoader");
         sceneLoader.GetComponent<SceneLoader>().FadeToLevel("ShowcaseEnemy");
+        playerObject.GetComponent<Player>().inTournament = false;
     }
 
     private void OnClick()
     {
         GameObject tournamentManager = GameObject.Find("TournamentManager");
         tournamentManager.GetComponent<TournamentManager>().generateTournament();
-        playerObject.GetComponent<Player>().inATournament = true;
+        playerObject.GetComponent<Player>().inTournament = true;
     }
 
 }

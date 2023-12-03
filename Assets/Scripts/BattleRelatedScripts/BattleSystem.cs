@@ -50,6 +50,7 @@ public class BattleSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (enemy != null){
 
             if (state != BattleState.IN_AFTER_BATTLE_WAITING){
@@ -74,7 +75,7 @@ public class BattleSystem : MonoBehaviour
 
                     if (!player.GetComponent<ActionsManager>().endBattle){
                         spareOrSacrifice.SetActive(true);
-                        Debug.Log("sa");
+                        //Debug.Log("sa");
                     }
                 }
             }
@@ -86,7 +87,7 @@ public class BattleSystem : MonoBehaviour
                 enemyHUD.SetActive(false);
             }
 
-            if (state == BattleState.IN_AFTER_BATTLE_WAITING && PlayerLevelManager.leveledUP == false && !spareOrSacrifice.activeSelf){
+            if (state == BattleState.IN_AFTER_BATTLE_WAITING && PlayerLevelManager.leveledUP == false && !spareOrSacrifice.activeSelf && !SceneManager.GetActiveScene().name.Equals("TournamentScene")){
                 goToTownButton.SetActive(true);
             }
             else if (state == BattleState.IN_AFTER_BATTLE_WAITING && PlayerLevelManager.leveledUP == true && !spareOrSacrifice.activeSelf){
@@ -119,6 +120,8 @@ public class BattleSystem : MonoBehaviour
                     enemy.GetComponent<EntityAttributes>().hitChance_heavy = enemy.GetComponent<EnemyActionsManager>().calculateHitChance("melee_heavy",enemy.GetComponent<EntityAttributes>().baseHitChance_heavy);
                     enemy.GetComponent<EntityAttributes>().hitChance_leap = enemy.GetComponent<EnemyActionsManager>().calculateHitChance("melee_leap",enemy.GetComponent<EntityAttributes>().baseHitChance_leap);
                     Debug.Log("enemy turn");
+                    EnemyHitbox.hasHitAlready = false;
+                    EnemyWeaponHitbox.hasHitAlready = false;
                     // Execute the statement that should occur only once
                     hasTurnChanged = false;
                 }
@@ -127,7 +130,12 @@ public class BattleSystem : MonoBehaviour
                 if (!enemy.GetComponent<EnemyActionsManager>().inAction && !enemy.GetComponent<EnemyActionsManager>().inReactionAction 
                 && !enemy.GetComponent<EnemyActionsManager>().played && !player.GetComponent<ActionsManager>().inAction) 
                 {
-                    enemy.GetComponent<EnemyBattleAI>().randomlyDoAnAction();
+                    if (enemy.GetComponent<EntityAttributes>().entityName.Equals("Unlucky Folk")){
+                        enemy.GetComponent<EnemyBattleAI>().UnluckyFolkAction();
+                    }
+                    else{
+                        enemy.GetComponent<EnemyBattleAI>().randomlyDoAnAction();
+                    }
                 }
 
                 // !enemy.GetComponent<EnemyActionsManager>().inAction çok önemli
@@ -157,6 +165,8 @@ public class BattleSystem : MonoBehaviour
                     player.GetComponent<EntityAttributes>().hitChance_heavy = player.GetComponent<ActionsManager>().calculateHitChance("melee_heavy",player.GetComponent<EntityAttributes>().baseHitChance_heavy);
                     player.GetComponent<EntityAttributes>().hitChance_leap = player.GetComponent<ActionsManager>().calculateHitChance("melee_leap",player.GetComponent<EntityAttributes>().baseHitChance_leap);
                     Debug.Log("player turn");
+                    PlayerHitbox.hasHitAlready = false;
+                    WeaponHitbox.hasHitAlready = false;
                     // Execute the statement that should occur only once
                     hasTurnChanged = true;
                 }
@@ -206,22 +216,28 @@ public class BattleSystem : MonoBehaviour
     public void editTournamentInfoNApplySlayedBoss(){
 
         if (enemy.name.Equals("Romulus The Leatherman(Clone)")){
-            player.GetComponent<Player>().inATournament = false;
+            //player.GetComponent<Player>().inTournament = false;
             TournamentManager.Instance.currentTournament = TournamentManager.Instance.tournaments[1];
             TournamentManager.Instance.canEnterCurrentTournament = false;
             EnemyGeneratorController.SlainRomulusTheLeatherman = true;
         }
         else if (enemy.name.Equals("Ferullus(Clone)")){
-            player.GetComponent<Player>().inATournament = false;
+            //player.GetComponent<Player>().inTournament = false;
             TournamentManager.Instance.currentTournament = TournamentManager.Instance.tournaments[2];
             TournamentManager.Instance.canEnterCurrentTournament = false;
             EnemyGeneratorController.SlainFerullus = true;
         }
         else if (enemy.name.Equals("Atticus Bloodthirst(Clone)")){
-            player.GetComponent<Player>().inATournament = false;
+            //player.GetComponent<Player>().inTournament = false;
             TournamentManager.Instance.currentTournament = TournamentManager.Instance.tournaments[3];
             TournamentManager.Instance.canEnterCurrentTournament = false;
             EnemyGeneratorController.SlainAtticusBloodthirst = true;
+        }
+        else if (enemy.name.Equals("The Mammoth(Clone)")){
+            //player.GetComponent<Player>().inTournament = false;
+            TournamentManager.Instance.currentTournament = TournamentManager.Instance.tournaments[4];
+            TournamentManager.Instance.canEnterCurrentTournament = false;
+            EnemyGeneratorController.SlainTheMammoth = true;
         }
     }
 

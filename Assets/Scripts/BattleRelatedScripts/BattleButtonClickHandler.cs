@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class BattleButtonClickHandler : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class BattleButtonClickHandler : MonoBehaviour
     public GameObject mediumattackbutton;
     public GameObject heavyattackbutton;
     public GameObject walkforwardbutton;
+    public GameObject walkbackwardbutton;
     public GameObject changeSidesButton;
 
     public GameObject canvas;
@@ -27,7 +29,7 @@ public class BattleButtonClickHandler : MonoBehaviour
 
         // Now myBoolean is true, so you can do something here, if it is already true, then this statement will execute
         canvas.GetComponent<RectTransform>().position = new Vector3(player.GetComponent<Rigidbody2D>().position.x-0.05f,-1.5f,player.transform.position.z);
-        HandleAttackButtons();
+        HandleButtons();
     }
 
     public void OnEnable(){
@@ -39,18 +41,23 @@ public class BattleButtonClickHandler : MonoBehaviour
         StartCoroutine(WaitForZoomIn());
     }
 
-    public void HandleAttackButtons(){
+    public void HandleButtons(){
         float distance = Math.Abs(player.GetComponent<Rigidbody2D>().transform.position.x - player.GetComponent<ActionsManager>().currentEnemyPos());
 
         //Debug.Log(distance);
 
         if (player.GetComponent<ActionsManager>().canAttack_Melee){
             leapattackbutton.SetActive(false);
-            lightattackbutton.SetActive(true);
-            mediumattackbutton.SetActive(true);
-            heavyattackbutton.SetActive(true);
-            walkforwardbutton.SetActive(false);
             changeSidesButton.SetActive(true);
+
+            if (player.GetComponent<ActionsManager>().side.Equals("left")){
+                walkforwardbutton.SetActive(false);
+                walkbackwardbutton.SetActive(true);
+            }
+            else if (player.GetComponent<ActionsManager>().side.Equals("right")){
+                walkforwardbutton.SetActive(true);
+                walkbackwardbutton.SetActive(false);
+            }
 
             // display hit chance
             lightattackbutton.transform.Find("HitChance").GetComponent<TextMeshProUGUI>().text = "%" + (player.GetComponent<EntityAttributes>().hitChance_light * 100).ToString("F0");
@@ -59,10 +66,10 @@ public class BattleButtonClickHandler : MonoBehaviour
         }
         else{
             leapattackbutton.SetActive(true);
-            lightattackbutton.SetActive(false);
-            mediumattackbutton.SetActive(false);
-            heavyattackbutton.SetActive(false);
+
             walkforwardbutton.SetActive(true);
+            walkbackwardbutton.SetActive(true);
+
             changeSidesButton.SetActive(false);
 
             // display hit chance
@@ -71,9 +78,22 @@ public class BattleButtonClickHandler : MonoBehaviour
     }
 
     void Update(){
+        HandleButtons();
         if (BattleSystem.state == BattleState.PLAYERTURN){
+            //flipAccordingToSide();
             canvas.GetComponent<RectTransform>().position = new Vector3(player.GetComponent<Rigidbody2D>().position.x-0.05f,-1.5f,player.transform.position.z);
-            HandleAttackButtons();
+            HandleButtons();
+        }
+    }
+
+    public void flipAccordingToSide(){
+        if (player.GetComponent<ActionsManager>().side.Equals("right")){
+            Quaternion desiredRotation = Quaternion.Euler(0f, 180f, 0f);
+            transform.rotation = desiredRotation;
+        }
+        else if (player.GetComponent<ActionsManager>().side.Equals("left")){
+            Quaternion desiredRotation = Quaternion.Euler(0f, 0, 0f);
+            transform.rotation = desiredRotation;
         }
     }
 

@@ -22,28 +22,39 @@ public class EnemyCreator : MonoBehaviour
         TournamentManagerObject = GameObject.Find("TournamentManager");
         TournamentManager tournamentManager = TournamentManagerObject.GetComponent<TournamentManager>();
 
-        if (player.GetComponent<Player>().inATournament && tournamentManager.enemysToBeat != 0){
+        if (player.GetComponent<Player>().inTournament && tournamentManager.enemysToBeat != 0){
             enemyGenerator.GetComponent<EnemyGeneratorController>().generateRandomEnemy();
             EnemyGeneratorController.Instance.GetComponent<Enemy>().isABoss = false;
+            EnemyGeneratorController.Instance.GetComponent<Enemy>().inTournament = true;
+        }
+        // UnluckyFolk
+        if(player.GetComponent<EntityAttributes>().level == 1){
+            enemyGenerator.GetComponent<EnemyGeneratorController>().generateUnluckyFolk();
         }
         // RomulusTheLeatherman
-        else if(player.GetComponent<Player>().inATournament && tournamentManager.currentTournament.Equals("first") && !EnemyGeneratorController.SlainRomulusTheLeatherman && tournamentManager.enemysToBeat == 0){
+        else if(player.GetComponent<Player>().inTournament && tournamentManager.currentTournament.Equals("first") && !EnemyGeneratorController.SlainRomulusTheLeatherman && tournamentManager.enemysToBeat == 0){
             enemyGenerator.GetComponent<EnemyGeneratorController>().generateRomulusTheLeatherman();
             EnemyGeneratorController.Instance.GetComponent<Enemy>().isABoss = true;
         }
         // Ferullus
-        else if(player.GetComponent<Player>().inATournament && tournamentManager.currentTournament.Equals("second") && !EnemyGeneratorController.SlainFerullus && tournamentManager.enemysToBeat == 0){
+        else if(player.GetComponent<Player>().inTournament && tournamentManager.currentTournament.Equals("second") && !EnemyGeneratorController.SlainFerullus && tournamentManager.enemysToBeat == 0){
             enemyGenerator.GetComponent<EnemyGeneratorController>().generateFerullus();
             EnemyGeneratorController.Instance.GetComponent<Enemy>().isABoss = true;
         }
         // Atticus Bloodthirst
-        else if(player.GetComponent<Player>().inATournament && tournamentManager.currentTournament.Equals("third") && !EnemyGeneratorController.SlainAtticusBloodthirst && tournamentManager.enemysToBeat == 0){
+        else if(player.GetComponent<Player>().inTournament && tournamentManager.currentTournament.Equals("third") && !EnemyGeneratorController.SlainAtticusBloodthirst && tournamentManager.enemysToBeat == 0){
             enemyGenerator.GetComponent<EnemyGeneratorController>().generateAtticusBloodthirst();
             EnemyGeneratorController.Instance.GetComponent<Enemy>().isABoss = true;
         }
-        else if (!player.GetComponent<Player>().inATournament){
+        // The Mammoth
+        else if(player.GetComponent<Player>().inTournament && tournamentManager.currentTournament.Equals("fourth") && !EnemyGeneratorController.SlainTheMammoth && tournamentManager.enemysToBeat == 0){
+            enemyGenerator.GetComponent<EnemyGeneratorController>().generateTheMammoth();
+            EnemyGeneratorController.Instance.GetComponent<Enemy>().isABoss = true;
+        }
+        else if (!player.GetComponent<Player>().inTournament){
             enemyGenerator.GetComponent<EnemyGeneratorController>().generateRandomEnemy();
             EnemyGeneratorController.Instance.GetComponent<Enemy>().isABoss = false;
+            EnemyGeneratorController.Instance.GetComponent<Enemy>().inTournament = false;
         }
 
         enemy = EnemyGeneratorController.Instance;

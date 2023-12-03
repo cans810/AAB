@@ -6,7 +6,8 @@ using UnityEngine.U2D.Animation;
 public class EquipmentManager : MonoBehaviour
 {
     public GameObject entity;
-    public SpriteLibraryAsset textures;
+    private SpriteRenderer spriteRenderer;
+    private BoxCollider2D boxCollider;
 
     // Start is called before the first frame update
     void Start()
@@ -15,9 +16,30 @@ public class EquipmentManager : MonoBehaviour
             if (gameObject.name.Equals("righthand_equipment")){
                 if (entity.GetComponent<EntityEquipment>().RightHandEquipped != null){
                     GetComponent<SpriteRenderer>().sprite = entity.GetComponent<EntityEquipment>().RightHandEquipped.texture;
+                    // Get the SpriteRenderer component
+                    spriteRenderer = GetComponent<SpriteRenderer>();
+
+                    if (spriteRenderer == null)
+                    {
+                        Debug.LogError("SpriteRenderer component not found on GameObject.");
+                        return;
+                    }
+
+                    // Add the BoxCollider2D component if not already present
+                    boxCollider = gameObject.GetComponent<BoxCollider2D>();
+                    if (boxCollider == null)
+                    {
+                        boxCollider = gameObject.AddComponent<BoxCollider2D>();
+                        boxCollider.isTrigger = true;
+                    }
+
+                    // Set the size of the BoxCollider2D to match the sprite size
+                    SetColliderSizeAndPosition();
                 }
                 else if (entity.GetComponent<EntityEquipment>().RightHandEquipped == null){
                     GetComponent<SpriteRenderer>().sprite = null;
+                    
+                    Destroy(gameObject.GetComponent<BoxCollider2D>());
                 }
             }
             if (gameObject.name.Equals("helmet")){
@@ -134,9 +156,31 @@ public class EquipmentManager : MonoBehaviour
             if (gameObject.name.Equals("righthand_equipment")){
                 if (entity.GetComponent<EntityEquipment>().RightHandEquipped != null){
                     GetComponent<SpriteRenderer>().sprite = entity.GetComponent<EntityEquipment>().RightHandEquipped.texture;
+
+                    // Get the SpriteRenderer component
+                    spriteRenderer = GetComponent<SpriteRenderer>();
+
+                    if (spriteRenderer == null)
+                    {
+                        Debug.LogError("SpriteRenderer component not found on GameObject.");
+                        return;
+                    }
+
+                    // Add the BoxCollider2D component if not already present
+                    boxCollider = gameObject.GetComponent<BoxCollider2D>();
+                    if (boxCollider == null)
+                    {
+                        boxCollider = gameObject.AddComponent<BoxCollider2D>();
+                        boxCollider.isTrigger = true;
+                    }
+
+                    // Set the size of the BoxCollider2D to match the sprite size
+                    SetColliderSizeAndPosition();
                 }
                 else if (entity.GetComponent<EntityEquipment>().RightHandEquipped == null){
                     GetComponent<SpriteRenderer>().sprite = null;
+
+                    Destroy(gameObject.GetComponent<BoxCollider2D>());
                 }
             }
             if (gameObject.name.Equals("helmet")){
@@ -244,5 +288,19 @@ public class EquipmentManager : MonoBehaviour
                 }
             } 
          }
+    }
+    void SetColliderSizeAndPosition()
+    {
+        // Get the size of the sprite from the SpriteRenderer
+        Vector2 spriteSize = spriteRenderer.sprite.bounds.size;
+
+        // Set the size of the BoxCollider2D
+        boxCollider.size = spriteSize;
+
+        // Get the position of the sprite from the SpriteRenderer
+        Vector2 spritePosition = spriteRenderer.sprite.bounds.center;
+
+        // Set the position of the BoxCollider2D
+        boxCollider.offset = spritePosition;
     }
 }

@@ -11,7 +11,9 @@ public class CopyEntityAppereance : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        copyFromEntity = GameObject.Find("Player");
+        if (copyFromEntity == null){
+            copyFromEntity = GameObject.Find("Player");
+        }
 
         ChangeSkinColor();
         ChangeRace();

@@ -72,8 +72,13 @@ MonoBehaviour:
       m_Sprite: {fileID: -8620765128055196570, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
       m_FromMain: 0
       m_SpriteOverride: {fileID: -8620765128055196570, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
+    - m_Name: bosshelmet_04
+      m_Hash: 720503756
+      m_Sprite: {fileID: 7890169677896489150, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 7890169677896489150, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
     m_FromMain: 0
-    m_EntryOverrideCount: 11
+    m_EntryOverrideCount: 12
   - m_Name: chestplate
     m_Hash: 476446529
     m_CategoryList: []
@@ -250,8 +255,13 @@ MonoBehaviour:
       m_Sprite: {fileID: -4510564714473232130, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
       m_FromMain: 0
       m_SpriteOverride: {fileID: -4510564714473232130, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
+    - m_Name: bossforearm_04
+      m_Hash: 430145142
+      m_Sprite: {fileID: -5744698108802206350, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -5744698108802206350, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
     m_FromMain: 0
-    m_EntryOverrideCount: 10
+    m_EntryOverrideCount: 11
   - m_Name: righthand_equipment
     m_Hash: 740224215
     m_CategoryList: []
@@ -276,8 +286,13 @@ MonoBehaviour:
       m_Sprite: {fileID: 0}
       m_FromMain: 0
       m_SpriteOverride: {fileID: 0}
+    - m_Name: bossaxe_04
+      m_Hash: 368932224
+      m_Sprite: {fileID: 5359893066809522741, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 5359893066809522741, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
     m_FromMain: 0
-    m_EntryOverrideCount: 4
+    m_EntryOverrideCount: 5
   - m_Name: leftarm_armor
     m_Hash: 668916298
     m_CategoryList: []
@@ -383,8 +398,13 @@ MonoBehaviour:
       m_Sprite: {fileID: 4103601661058621463, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
       m_FromMain: 0
       m_SpriteOverride: {fileID: 4103601661058621463, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
+    - m_Name: bosspairforearm_04
+      m_Hash: 57644774
+      m_Sprite: {fileID: 4248773102182304208, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 4248773102182304208, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
     m_FromMain: 0
-    m_EntryOverrideCount: 10
+    m_EntryOverrideCount: 11
   - m_Name: lefthand_equipment
     m_Hash: 221465273
     m_CategoryList: []
@@ -633,8 +653,13 @@ MonoBehaviour:
       m_Sprite: {fileID: -4596154048165727771, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
       m_FromMain: 0
       m_SpriteOverride: {fileID: -4596154048165727771, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
+    - m_Name: bossshoe_04
+      m_Hash: 529376108
+      m_Sprite: {fileID: -1379522676721277209, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1379522676721277209, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
     m_FromMain: 0
-    m_EntryOverrideCount: 10
+    m_EntryOverrideCount: 11
   - m_Name: leftleg_armor
     m_Hash: 77552225
     m_CategoryList: []
@@ -806,6 +831,11 @@ MonoBehaviour:
       m_Sprite: {fileID: -5311137050981272325, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
       m_FromMain: 0
       m_SpriteOverride: {fileID: -5311137050981272325, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
+    - m_Name: bosspairshoe_04
+      m_Hash: 450173004
+      m_Sprite: {fileID: -2051182478809127845, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -2051182478809127845, guid: a120b5922db5e0a4681c1b8e9f19e00c, type: 3}
     m_FromMain: 0
-    m_EntryOverrideCount: 10
+    m_EntryOverrideCount: 11
   m_PrimaryLibraryGUID: 

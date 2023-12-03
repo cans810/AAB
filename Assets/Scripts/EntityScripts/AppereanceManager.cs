@@ -22,20 +22,22 @@ public class AppereanceManager : MonoBehaviour
 
     void Update(){
 
-        if (race.Equals("Beast") && hairObject.activeSelf && facialHairObject.activeSelf){
+        if (hairObject && facialHairObject){
+            if (race.Equals("Beast") && hairObject.activeSelf && facialHairObject.activeSelf){
             hairObject.SetActive(false);
             facialHairObject.SetActive(false);
-        }
-        else if (!race.Equals("Beast") && !hairObject.activeSelf && !facialHairObject.activeSelf){
-            hairObject.SetActive(true);
-            facialHairObject.SetActive(true);
-        }
+            }
+            else if (!race.Equals("Beast") && !hairObject.activeSelf && !facialHairObject.activeSelf){
+                hairObject.SetActive(true);
+                facialHairObject.SetActive(true);
+            }
 
-        if (gameObject.GetComponent<EntityEquipment>().HelmetWorn != null){
-            hairObject.SetActive(false);
-        }
-        else if (gameObject.GetComponent<EntityEquipment>().HelmetWorn != null && !race.Equals("Beast")){
-            hairObject.SetActive(true);
+            if (gameObject.GetComponent<EntityEquipment>().HelmetWorn != null){
+                hairObject.SetActive(false);
+            }
+            else if (gameObject.GetComponent<EntityEquipment>().HelmetWorn != null && !race.Equals("Beast")){
+                hairObject.SetActive(true);
+            }
         }
 
     }

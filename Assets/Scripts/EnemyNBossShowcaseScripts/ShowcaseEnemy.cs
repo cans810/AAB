@@ -102,7 +102,7 @@ public class ShowcaseEnemy : MonoBehaviour
     }
 
     public void enterFirstBattle(){
-        if (Player.Instance.inATournament){
+        if (Player.Instance.inTournament){
             GameObject sceneLoader = GameObject.Find("SceneLoader");
             sceneLoader.GetComponent<SceneLoader>().FadeToLevel("TournamentScene");
         }

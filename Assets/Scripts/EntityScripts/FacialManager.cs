@@ -34,6 +34,9 @@ public class FacialManager : MonoBehaviour
                 else if (entity.GetComponent<AppereanceManager>().race.Equals("Beast")){
                     GetComponent<SpriteRenderer>().sprite = textures.GetSprite("eyes_beast",entity.GetComponent<ExpressionManager>().eyes_state);
                 }
+                else if (entity.GetComponent<AppereanceManager>().race.Equals("Giant")){
+                    GetComponent<SpriteRenderer>().sprite = textures.GetSprite("eyes_giant",entity.GetComponent<ExpressionManager>().eyes_state);
+                }
             }
             if (gameObject.name.Equals("mouth")){
                 if (entity.GetComponent<AppereanceManager>().race.Equals("Human")){
@@ -56,6 +59,9 @@ public class FacialManager : MonoBehaviour
                 }
                 else if (entity.GetComponent<AppereanceManager>().race.Equals("Beast")){
                     GetComponent<SpriteRenderer>().sprite = textures.GetSprite("mouths_beast",entity.GetComponent<ExpressionManager>().mouth_state);
+                }
+                else if (entity.GetComponent<AppereanceManager>().race.Equals("Giant")){
+                    GetComponent<SpriteRenderer>().sprite = textures.GetSprite("mouths_giant",entity.GetComponent<ExpressionManager>().mouth_state);
                 }
             }
             if (gameObject.name.Equals("hair")){
@@ -93,6 +99,9 @@ public class FacialManager : MonoBehaviour
                 else if (entity.GetComponent<AppereanceManager>().race.Equals("Beast")){
                     GetComponent<SpriteRenderer>().sprite = textures.GetSprite("eyes_beast",entity.GetComponent<ExpressionManager>().eyes_state);
                 }
+                else if (entity.GetComponent<AppereanceManager>().race.Equals("Giant")){
+                    GetComponent<SpriteRenderer>().sprite = textures.GetSprite("eyes_giant",entity.GetComponent<ExpressionManager>().eyes_state);
+                }
             }
             if (gameObject.name.Equals("mouth")){
                 if (entity.GetComponent<AppereanceManager>().race.Equals("Human")){
@@ -115,6 +124,9 @@ public class FacialManager : MonoBehaviour
                 }
                 else if (entity.GetComponent<AppereanceManager>().race.Equals("Beast")){
                     GetComponent<SpriteRenderer>().sprite = textures.GetSprite("mouths_beast",entity.GetComponent<ExpressionManager>().mouth_state);
+                }
+                else if (entity.GetComponent<AppereanceManager>().race.Equals("Giant")){
+                    GetComponent<SpriteRenderer>().sprite = textures.GetSprite("mouths_giant",entity.GetComponent<ExpressionManager>().mouth_state);
                 }
             }
             if (gameObject.name.Equals("hair")){

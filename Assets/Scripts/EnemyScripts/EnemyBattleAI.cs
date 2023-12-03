@@ -34,6 +34,40 @@ public class EnemyBattleAI : MonoBehaviour
         
     }
 
+    public void UnluckyFolkAction(){
+        int randomAction = UnityEngine.Random.Range(0,7);
+
+        string actionGenerated = actions[randomAction];
+
+        if(actionGenerated.Equals("walkright")){
+            if (enemy.GetComponent<EnemyActionsManager>().side == "left"){
+                if (enemy.GetComponent<EnemyActionsManager>().canAttack_Melee){
+                    UnluckyFolkAction();
+                }
+
+                else{
+                    enemy.GetComponent<EnemyActionsManager>().moveRight();
+                }
+            }
+            else if (enemy.GetComponent<EnemyActionsManager>().side == "right"){
+                enemy.GetComponent<EnemyActionsManager>().moveRight();
+            }
+        }
+        else if(actionGenerated.Equals("walkleft")){
+            if (enemy.GetComponent<EnemyActionsManager>().side == "right"){
+                if (enemy.GetComponent<EnemyActionsManager>().canAttack_Melee){
+                    UnluckyFolkAction();
+                }
+                else{
+                    enemy.GetComponent<EnemyActionsManager>().moveLeft();
+                }
+            }
+            else if (enemy.GetComponent<EnemyActionsManager>().side == "left"){
+                enemy.GetComponent<EnemyActionsManager>().moveLeft();
+            }
+        }
+    }
+
     public void randomlyDoAnAction(){
         
         int randomAction = UnityEngine.Random.Range(0,7);
@@ -41,10 +75,31 @@ public class EnemyBattleAI : MonoBehaviour
         string actionGenerated = actions[randomAction];
 
         if(actionGenerated.Equals("walkright")){
-            enemy.GetComponent<EnemyActionsManager>().moveRight();
+            if (enemy.GetComponent<EnemyActionsManager>().side == "left"){
+                if (enemy.GetComponent<EnemyActionsManager>().canAttack_Melee){
+                    randomlyDoAnAction();
+                }
+
+                else{
+                    enemy.GetComponent<EnemyActionsManager>().moveRight();
+                }
+            }
+            else if (enemy.GetComponent<EnemyActionsManager>().side == "right"){
+                enemy.GetComponent<EnemyActionsManager>().moveRight();
+            }
         }
         else if(actionGenerated.Equals("walkleft")){
-            enemy.GetComponent<EnemyActionsManager>().moveLeft();
+            if (enemy.GetComponent<EnemyActionsManager>().side == "right"){
+                if (enemy.GetComponent<EnemyActionsManager>().canAttack_Melee){
+                    randomlyDoAnAction();
+                }
+                else{
+                    enemy.GetComponent<EnemyActionsManager>().moveLeft();
+                }
+            }
+            else if (enemy.GetComponent<EnemyActionsManager>().side == "left"){
+                enemy.GetComponent<EnemyActionsManager>().moveLeft();
+            }
         }
         else if(actionGenerated.Equals("attacklight")){
             enemy.GetComponent<EnemyActionsManager>().attackLight();
@@ -56,7 +111,24 @@ public class EnemyBattleAI : MonoBehaviour
             enemy.GetComponent<EnemyActionsManager>().attackHeavy();
         }
         else if(actionGenerated.Equals("attackleap")){
-            enemy.GetComponent<EnemyActionsManager>().attackLeaping();
+            if (enemy.GetComponent<EnemyActionsManager>().side == "left"){
+                if (enemy.GetComponent<EnemyActionsManager>().canAttack_Melee){
+                    randomlyDoAnAction();
+                }
+
+                else{
+                    enemy.GetComponent<EnemyActionsManager>().attackLeaping();
+                }
+            }
+            if (enemy.GetComponent<EnemyActionsManager>().side == "right"){
+                if (enemy.GetComponent<EnemyActionsManager>().canAttack_Melee){
+                    randomlyDoAnAction();
+                }
+
+                else{
+                    enemy.GetComponent<EnemyActionsManager>().attackLeaping();
+                }
+            }
         }
         else if(actionGenerated.Equals("intimidate")){
             enemy.GetComponent<EnemyActionsManager>().intimidate();
